@@ -23,7 +23,7 @@ const Views = () => {
     const interval = setInterval(() => {
       setActive(prev => {
         const keys = Object.keys(imageMapping);
-        const nextIndex = (keys.indexOf(prev) + 1) % keys.length; // Get the next key cyclically
+        const nextIndex = (keys.indexOf(prev) + 1) % keys.length;
         return keys[nextIndex];
       });
     }, 3000);
@@ -41,18 +41,24 @@ const Views = () => {
       initial={{ opacity: 0, y: 50 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.7 }}
-      className='flex flex-col gap-15 lg:px-25 md:px-12.5 xl:px-50'>
-      <div className='flex flex-col gap-4'>
-        <h3 className='text-[45px] font-extrabold text-black leading-tight text-center'>Quick Views of Your Dashboard</h3>
-        <div className='gap-4 flex items-center justify-center'>
+      className='md:flex flex-col my-5   gap-8 sm:gap-10 lg:gap-15 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-50  hidden'>
+      
+      {/* Heading */}
+      <div className='flex flex-col gap-8'>
+        <h3 className='text-2xl sm:text-3xl md:text-4xl xl:text-[45px] font-extrabold text-black leading-tight text-center'>
+          Quick Views of Your Dashboard
+        </h3>
+        
+        {/* Button Group */}
+        <div className='gap-2 sm:gap-4 flex flex-col sm:flex-row items-center justify-center'>
           {Object.keys(imageMapping).map((key) => (
             <motion.button
               key={key}
-              className={`px-10 py-3 rounded-[10px] border-[2px] smooth3 font-semibold border-primary hover:text-white hover:bg-primary ${active === key ? "text-white bg-primary" : "bg-white text-primary"}`}
+              className={`px-6 sm:px-8 lg:px-10 py-2 sm:py-3 rounded-[10px] border-[2px] smooth3 font-semibold border-primary hover:text-white hover:bg-primary ${active === key ? "text-white bg-primary" : "bg-white text-primary"}`}
               onClick={() => setActive(key)}
-              whileHover={{ scale: 1.05 }} // Scale up on hover
+              whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
-              onMouseEnter={() => setCurrentImage(imageMapping[key])} // Change image on hover
+              onMouseEnter={() => setCurrentImage(imageMapping[key])}
             >
               {key === "dashboard" ? "Dashboard" :
                key === "analytics" ? "Google Analytics" :
@@ -63,24 +69,30 @@ const Views = () => {
         </div>
       </div>
       
+      {/* Image Display */}
+      <div className='flex items-center justify-center'>
       <motion.div
-        key={currentImage} // Add key for animation reset on image change
+        key={currentImage}
         initial={{ opacity: 0, x: 100 }}
         animate={{ opacity: 1, x: 0 }}
-        exit={{ opacity: 0, x: -100 }} // Exit animation
-        transition={{ type: "spring", stiffness: 200,  ease: "linear",duration: 5 }}
-        className='h-[87vh]'
-      >
+        exit={{ opacity: 0, x: -100 }}
+        transition={{ type: "spring", stiffness: 200, ease: "linear", duration: 5 }}
+        className=' md:h-[70vh] h-[30vh] lg:h-[80vh] xl:h-[87vh] w-full'>
         <Image
-          src={currentImage}
+          src={currentImage}  
           alt="current view"
-          width={2000}
-          height={2000}
+          layout="fill"
+          objectFit="contain"
+          priority
+
         />
       </motion.div>
-
+      </div>
+      {/* Call-to-action Button */}
       <div className='flex items-center justify-center'>
-        <button className="w-[200px] px-10 py-3 bg-primary rounded-full text-white text-base">Get Started Free</button>
+        <button className="w-[200px] px-8 sm:px-10 py-2 sm:py-3 bg-primary rounded-full text-white text-sm sm:text-base hover:text-primary hover:bg-white hover:border-primary border border-white smooth3">
+          Get Started Free
+        </button>
       </div>
     </motion.div>
   );

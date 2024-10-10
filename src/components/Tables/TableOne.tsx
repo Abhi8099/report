@@ -133,7 +133,7 @@ export default function TableOne() {
   };
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md">
+    <div className="p-6 bg-white dark:bg-gray-dark rounded-lg shadow-md">
       <div className="flex justify-between items-center mb-6">
         {/* Tabs for switching between different categories */}
         <Tabs 
@@ -146,15 +146,15 @@ export default function TableOne() {
           <TabPane tab="PAGES" key="3" />
           <TabPane tab="COUNTRIES" key="4" />
         </Tabs>
-        <button className="px-4 py-2 bg-[#F8F8F8] text-primary rounded-md cursor-pointer text-base font-medium transition-colors flex gap-2">
+        {/* <button className="px-4 py-2 bg-[#F8F8F8] text-primary rounded-md cursor-pointer text-base font-medium transition-colors flex gap-2">
           Filter<IoFilter className="text-xl" />
-        </button>
+        </button> */}
       </div>
       {/* Ant Design table to display the data */}
       <Table 
         columns={columns} 
         dataSource={data[activeTab]} 
-        className="border border-gray-200 rounded-md" 
+        className="border border-gray-200 rounded-md dark:bg-gray-dark" 
         pagination={{
           pageSize: 10,
           showSizeChanger: true,

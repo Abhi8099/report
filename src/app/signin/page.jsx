@@ -14,6 +14,7 @@ import Cookies from 'js-cookie';
 import axios from "axios";
 import { BASE_URL } from '@/utils/api';
 import { useRouter } from 'next/navigation';
+import { motion } from "framer-motion"
 
 
 
@@ -89,68 +90,78 @@ const Signin = () => {
     };
 
     return (
-        <>
-            <HeaderComp />
-            <div className='h-screen flex items-center justify-center px-60 text-black'>
-                <div className="h-[746px] w-full flex shadow-lg bg-gradient-to-b from-primary to-[#fff] rounded-[37px]">
-                    <div className="flex flex-1 flex-col gap-6 items-center justify-center bg-primary rounded-l-[37px] rounded-br-[37px] text-white">
-                        <h3 className='text-[27px]  text-white'>Hello,</h3>
-                        <h3 className='text-[43px] font-semibold text-white'>Welcome</h3>
+<>
+    <HeaderComp />
+    <motion.div
+      initial={{opacity:0}}
+      animate={{opacity:1}}
+      transition={{ease:"linear"}}
+    className='h-screen flex items-center justify-center px-4 md:px-20 lg:px-40 xl:px-60 text-black'>
+        <div className="h-[746px] w-full flex shadow-lg bg-gradient-to-b from-primary to-[#fff] rounded-[37px]">
+            <div className="hidden md:flex flex-1 flex-col gap-6 items-center justify-center bg-primary rounded-l-[37px] rounded-br-[37px] text-white p-6 md:p-8 lg:p-10">
+                <h3 className='text-[24px] md:text-[27px] text-white'>Hello,</h3>
+                <h3 className='text-[36px] md:text-[43px] font-semibold text-white'>Welcome</h3>
 
-                        <Image alt='amico' src={"/images/new/panaa.svg"} width={500} height={500} className='object-cover' />
-                    </div>
-                    <div className="flex flex-1 bg-white rounded-r-[37px] rounded-tl-[37px] flex-col gap-6 items-center justify-center ">
-                        <div className='w-[550px] flex flex-col gap-6'>
-                            <Image alt='amico' src={"/images/new/Group.svg"} width={50} height={50} className='object-cover' />
-                            <h3 className='text-[28px] font-semibold text-black'>Log in</h3>
-                            <div className='flex flex-col gap-8 w-full'>
+                <Image alt='amico' src={"/images/new/panaa.svg"} width={500} height={500} className='object-cover' />
+            </div>
+            <div className="flex flex-1 bg-white rounded-r-[37px] rounded-tl-[37px] flex-col gap-6 items-center justify-center p-6 md:p-8 lg:p-10">
+                <div className='w-full max-w-[550px] flex flex-col gap-6'>
+                    <Image alt='amico' src={"/images/new/Group.svg"} width={50} height={50} className='object-cover' />
+                    <h3 className='text-[24px] md:text-[28px] font-semibold text-black'>Log in</h3>
+                    <div className='flex flex-col gap-8 w-full'>
 
-                                <div className="w-full">
-                                    <input
-                                        className={`w-full outline-none border-b py-3 smooth3 bg-white autofill:bg-white  ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
-                                        placeholder='Email Address'
-                                        type="text"
-                                        name="email"
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                    />
-                                    {errors.email && <span className="text-red-500 text-sm">{errors.email}</span>}
-                                </div>
+                        <div className="w-full">
+                            <input
+                                className={`w-full outline-none border-b py-3 smooth3 bg-white autofill:bg-white  ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
+                                placeholder='Email Address'
+                                type="text"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                            />
+                            {errors.email && <span className="text-red-500 text-sm">{errors.email}</span>}
+                        </div>
 
-                                <div className="w-full flex justify-between items-center gap-4">
-                                    <div className="w-full">
-                                        <input
-                                            className={`w-full outline-none border-b py-3 smooth3 bg-white autofill:bg-white  ${errors.password ? 'border-red-500' : 'border-gray-300'}`}
-                                            placeholder='Password'
-                                            type={isVisible ? "text" : "password"}
-                                            name="password"
-                                            value={formData.password}
-                                            onChange={handleChange}
-                                        />
-                                        {errors.password && <span className="text-red-500 text-sm">{errors.password}</span>}
-                                    </div>{isVisible ?
-                                        <IoMdEye className='text-2xl cursor-pointer' onClick={() => setIsVisible(!isVisible)} />
-                                        :
-                                        <IoMdEyeOff className='text-2xl cursor-pointer' onClick={() => setIsVisible(!isVisible)} />
-                                    }
-                                </div>
+                        <div className="w-full flex justify-between items-center gap-4">
+                            <div className="w-full">
+                                <input
+                                    className={`w-full outline-none border-b py-3 smooth3 bg-white autofill:bg-white  ${errors.password ? 'border-red-500' : 'border-gray-300'}`}
+                                    placeholder='Password'
+                                    type={isVisible ? "text" : "password"}
+                                    name="password"
+                                    value={formData.password}
+                                    onChange={handleChange}
+                                />
+                                {errors.password && <span className="text-red-500 text-sm">{errors.password}</span>}
                             </div>
-                            <button
-                                onClick={handleSubmit}
-                                className='w-full bg-primary text-white py-3 flex items-center justify-center disabled:opacity-50 rounded-lg disabled:cursor-not-allowed'
-                                disabled={!formData.email || !formData.password || Object.values(errors).some(err => err !== '')}
-                            >
-                                Log in
-                            </button>
-
-                            <h3 className='text-center text-[#948F8F] font-medium w-full flex items-center justify-center gap-2'>Don&apos;t have an account ? <Link href={"/signup"} className='text-primary font-semibold hover:scale-105 hover:underline smooth3'>Sign Up</Link></h3>
-                            <h3 className='text-center w-full flex items-center justify-center gap-2 font-semibold'>Follow - <FaFacebook className='text-primary text-lg' /><FaInstagram className='text-primary text-lg' /><FaLinkedinIn className='text-primary text-lg' /><BsPinterest className='text-primary text-lg' /></h3>
+                            {isVisible ? (
+                                <IoMdEye className='text-2xl cursor-pointer' onClick={() => setIsVisible(!isVisible)} />
+                            ) : (
+                                <IoMdEyeOff className='text-2xl cursor-pointer' onClick={() => setIsVisible(!isVisible)} />
+                            )}
                         </div>
                     </div>
+                    <button
+                        onClick={handleSubmit}
+                        className='w-full bg-primary text-white py-3 flex items-center justify-center disabled:opacity-50 rounded-lg disabled:cursor-not-allowed'
+                        disabled={!formData.email || !formData.password || Object.values(errors).some(err => err !== '')}
+                    >
+                        Log in
+                    </button>
+
+                    <h3 className='text-center text-[#948F8F] font-medium w-full flex items-center justify-center gap-2'>
+                        Don&apos;t have an account? <Link href={"/signup"} className='text-primary font-semibold hover:scale-105 hover:underline smooth3'>Sign Up</Link>
+                    </h3>
+                    <h3 className='text-center w-full flex items-center justify-center gap-2 font-semibold'>
+                        Follow - <FaFacebook className='text-primary text-lg' /><FaInstagram className='text-primary text-lg' /><FaLinkedinIn className='text-primary text-lg' /><BsPinterest className='text-primary text-lg' />
+                    </h3>
                 </div>
             </div>
-            <FooterFour />
-        </>
+        </div>
+    </motion.div>
+    <FooterFour />
+</>
+
     );
 };
 

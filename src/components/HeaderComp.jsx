@@ -7,6 +7,7 @@ import { FiArrowUpRight } from "react-icons/fi"
 import { Link as ScrollLink } from "react-scroll"
 import { MdOutlineMenu, MdOutlineCancel } from "react-icons/md"
 import Link from "next/link"
+import { motion } from "framer-motion"
 
 export default function Navbar() {
     const token = Cookies.get('login_access_token')
@@ -96,7 +97,12 @@ export default function Navbar() {
             </nav>
 
             {menuOpen && (
-                <div className="lg:hidden fixed inset-0 bg-white shadow-lg z-40 overflow-y-auto">
+                <motion.div
+                initial = {{opacity:0, y:100}}
+                animate = {{opacity:1 , y:0}}
+                transition={{  type: "spring", damping: 10, stiffness: 100}}
+                exit={{opacity:0, y:100 }}
+                className="lg:hidden fixed inset-0 bg-white shadow-lg z-40 overflow-y-auto ">
                     <div className="flex flex-col items-center justify-center mt-20 mx-4 sm:mx-6 md:mx-8">
                         {menuItems.map((item) => (
                             <div key={item.page} className="w-full shadow mb-2">
@@ -129,14 +135,12 @@ export default function Navbar() {
                             </div>
                         ))}
 
-                        <a href="/press-release" className="text-gray-700 py-4 w-full shadow items-center mb-2 justify-center flex rounded-lg">
-                            Press Release
-                        </a>
+
                         <a href="tel:+91-8949272273" className="text-gray-700 py-4 w-full shadow items-center mb-2 justify-center flex rounded-lg">
                             <span className="mr-2">📞</span>+91-8949272273
                         </a>
                         <a href="mailto:support@Vefogix.com" className="text-gray-700 py-4 w-full shadow items-center mb-2 justify-center flex rounded-lg">
-                            <span className="mr-2">📧</span>support@Vefogix.com
+                            <span className="mr-2">📧</span>support@analytixio.com
                         </a>
 
                         <div className="flex items-center space-x-4 my-4">
@@ -152,7 +156,7 @@ export default function Navbar() {
                             )}
                         </div>
                     </div>
-                </div>
+                </motion.div>
             )}
 
             <style jsx>{`

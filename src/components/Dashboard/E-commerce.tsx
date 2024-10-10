@@ -29,10 +29,10 @@ const ECommerce: React.FC = () => {
     <ProjectHeader />
           </div>
           <div className="mb-4 flex items-center w-full justify-between  px-4  md:mt-6 ">
-<h3 className="text-2xl font-semibold text-black">Google search console:</h3>
+<h3 className="text-2xl font-semibold text-black dark:text-white">Google search console:</h3>
 <h3 className="text-sm font-semibold">      Last update: {formatDistanceToNow(currentTime, { addSuffix: true })}</h3>
           </div>
-          <div className=' bg-white p-7 rounded-[10px]'>
+          <div className=' bg-white dark:bg-gray-dark p-7 rounded-[10px]'>
           <DataStatsOne />
           </div>
 

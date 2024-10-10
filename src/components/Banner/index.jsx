@@ -3,7 +3,6 @@ import Image from 'next/image';
 import React from 'react'
 import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
 
-
 const people = [
     {
         id: 1,
@@ -39,47 +38,50 @@ const people = [
     },
 
 ];
+
 const Banner = () => {
 
-
     return (
-        <div
-        className='pl-60 pt-41 h-screen flex w-full'
->
-            <div className='flex flex-col items-start justify-center gap-7 pr-10 -mt-20' >
-                <h1 className='text-[55px] text-black font-extrabold leading-tight'>Multiple Reports, <br />
+        <div className='flex flex-col xl:flex-row w-full h-screen xl:pl-60 xl:pt-41'>
+            <div className='flex flex-col items-start justify-center gap-7 px-5 pt-10 xl:pr-10 xl:pt-0 xl:-mt-20'>
+                <h1 className='text-[30px] sm:text-[36px] lg:text-[45px] xl:text-[55px] text-black font-extrabold leading-tight'>
+                    Multiple Reports, <br />
                     One Solution <br />
                     Simplify your workflow <br />
-                    with Analytixio</h1>
-                <h3 className='text-[#7C7C7C ] font-medium text-lg'>Your all-in-one analytics dashboard for data-driven decisions.</h3>
+                    with Analytixio
+                </h1>
+                <h3 className='text-[#7C7C7C] font-medium text-sm sm:text-base xl:text-lg'>
+                    Your all-in-one analytics dashboard for data-driven decisions.
+                </h3>
                 <div className='flex flex-col gap-2'>
-                    <h3 className='text-base text-black font-semibold'>Integrated Platforms</h3>
+                    <h3 className='text-sm sm:text-base text-black font-semibold'>Integrated Platforms</h3>
                     <Image
-                        className=""
                         src={"/images/new/Group 1000004888.svg"}
                         alt="new"
                         width={100}
                         height={100}
                     />
                 </div>
-                <div className="flex gap-2">
-                    <button className="flex flex-1 items-center justify-center px-10 py-3 bg-primary rounded-full text-white text-base hover:text-primary hover:bg-white hover:border-primary border border-white  smooth3">Get Started Free</button>
-                    <div className="flex flex-row flex-1">
+                <div className="flex flex-col sm:flex-row gap-2">
+                    <button className="flex items-center justify-center px-5 py-2 sm:px-10 sm:py-3 bg-primary rounded-full text-white text-sm sm:text-base hover:text-primary hover:bg-white hover:border-primary border border-white transition">
+                        Get Started Free
+                    </button>
+                    <div className="flex flex-row items-center">
                         <AnimatedTooltip items={people} />
                     </div>
                 </div>
             </div>
-            <div className='flex  flex-1 items-center justify-end' >
+            <div className='flex items-center justify-center xl:justify-end flex-1'>
                 <Image
-                    className=""
                     src={"/images/new/Group 1000004972.svg"}
                     alt="new"
                     width={950}
                     height={950}
+                    className="w-full xl:w-auto"
                 />
             </div>
         </div>
     )
 }
 
-export default Banner
+export default Banner;

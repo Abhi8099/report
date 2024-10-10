@@ -20,7 +20,7 @@ const DataStatCard: React.FC<{ item: any }> = ({ item }) => (
 
 
 
-  <div className="w-[250px] max-w-xs rounded-[10px] bg-transparent p-6 shadow-1 dark:bg-gray-dark" style={{ backgroundColor: item.bg }}>
+  <div className="w-full md:w-[250px] max-w-xs rounded-[10px] bg-transparent p-6 shadow-1 dark:bg-gray-dark" style={{ backgroundColor: item.bg }}>
     <div className="flex w-full text-white gap-2 items-center justify-start rounded-full">
       {item.icon}
       <span className="text-lg font-medium">{item.title}</span>
@@ -49,7 +49,7 @@ const DataStatsOne: React.FC<dataStats> = () => {
   const [form] = Form.useForm();
   const [showRangePicker, setShowRangePicker] = useState(false);
   const { fetchGSCData, loading, dateData, setpredefinedDays, predefinedDays } = useGoogleSearchConsoleData();
-  console.log(selectedProject);
+  // console.log(selectedProject);
   
 
   const today = dayjs();
@@ -122,7 +122,7 @@ const DataStatsOne: React.FC<dataStats> = () => {
   ];
 
   return (
-    <div className="gap-4 md:grid-cols-2 md:gap-6 flex 2xl:gap-7.5">
+    <div className="gap-4 md:grid-cols-2 md:gap-6 flex md:flex-row flex-col 2xl:gap-7.5 ">
       {loading ? (
         <>
           {dataStatsList.map((item, index) => (
@@ -153,11 +153,12 @@ const DataStatsOne: React.FC<dataStats> = () => {
 
       {/* Conditionally show Date Range Picker */}
       {showRangePicker && (
-        <div className="w-3/4">
+        <div className="w-3/4 dark:text-white">
           <Form.Item
             label="Select Date Range"
             name="dateRange"
             rules={[{ required: true, message: 'Please select a date range!' }]}
+            className=" dark:text-white"
           >
             <RangePicker
               className="py-1 px-4 w-full border border-gray-300 rounded-md text-lg"

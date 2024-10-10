@@ -99,7 +99,7 @@ export default function ProjectHeader() {
   }
 
   return (
-    <div className='w-full bg-white rounded-[10px] px-4 py-3 flex gap-3 overflow-x-auto'>
+    <div className='w-full bg-white dark:bg-gray-800 dark:shadow-gray-700 dark:text-white rounded-[10px] px-4 py-3 flex gap-3 overflow-x-auto'>
       <button
         className='flex gap-2 items-center border border-2 border-primary px-6 py-1.5 text-primary rounded-full'
         onClick={() => {
@@ -116,7 +116,7 @@ export default function ProjectHeader() {
           className={`flex min-w-fit gap-2 items-center border border-2 text-base font-medium px-6 py-1.5 rounded-full smooth1  ${
             selectedButtonId === project.id
               ? "bg-primary text-white border-primary"
-              : "bg-gray-200 text-black border-gray hover:border-primary hover:text-white hover:bg-primary"
+              : "bg-gray-200 text-black border-gray hover:border-primary hover:text-white hover:bg-primary dark:bg-gray-800 dark:border-gray-600 dark:text-white"
           }`}
           onClick={() => handleProjectClick(project)}
         >

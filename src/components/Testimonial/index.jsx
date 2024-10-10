@@ -78,15 +78,15 @@ const Testimonial = () => {
     animate={inView ? { opacity: 1, y: 0 } : {}} 
     transition={{ duration: 0.7 }}
     
-    className='flex h-[80vh] flex-row gap-15 lg:px-25 md:px-12.5 xl:px-50'>
+    className='flex h-[80vh]  gap-15 sm:px-6 md:px-8 lg:px-12 xl:px-50 md:flex-row flex-col'>
       <div className='flex flex-1 items-center justify-center bgTestimonial'>
-        <div className="relative w-[450px] h-[200px] ">
+        <div className="relative md:w-[450px] h-[200px] w-full ">
           {cards.map((card, index) => {
             const cardIndex = (index - activeIndex + cards.length) % cards.length;
             return (
               <motion.div
                 key={card.id}
-                className={`absolute ${cardIndex === 0 ? '-bottom-0 -right-0' : cardIndex === 1 ? '-bottom-10 -right-10' : '-bottom-20 -right-20'} h-[245px] w-[504px] bg-white rounded-[10px] shadow-xl p-5 pt-6`}
+                className={`absolute ${cardIndex === 0 ? 'md:-bottom-0 md:-right-0' : cardIndex === 1 ? 'md:-bottom-10 md:-right-10' : 'md:-bottom-20 md:-right-20'} md:h-[245px] md:w-[504px] bg-white rounded-[10px] shadow-xl p-5 pt-6`}
                 initial={{ opacity: 1, y: 0 }}
                 animate={{
                   opacity: cardIndex === 0 && isAnimating ? 0 : 1,
@@ -113,31 +113,31 @@ const Testimonial = () => {
         </div>
       </div>
 
-      <div className='flex flex-1 flex-col gap-10 items-center justify-center'>
-        <h3 className='text-[45px] font-extrabold text-black leading-tight text-start'>
+      <div className='flex-1 flex flex-col gap-10 items-center justify-center px-6 md:px-0'>
+        <h3 className='text-[28px] md:text-[45px] font-extrabold text-black leading-tight text-start'>
           What people say <br /> about Us.
         </h3>
-        <div className='flex gap-8 items-center justify-start -ml-24'>
+        <div className='flex gap-4 md:gap-8 items-center justify-start'>
           <div 
-            className='h-12 w-12 text-[#6A707E] hover:text-primary hover:border-primary smooth3 border-[#6A707E] rounded-full border cursor-pointer flex items-center justify-center'
+            className='h-10 w-10 md:h-12 md:w-12 text-[#6A707E] hover:text-primary hover:border-primary smooth3 border-[#6A707E] rounded-full border cursor-pointer flex items-center justify-center'
             onClick={() => rotateCards('prev')}
           >
-            <LiaArrowLeftSolid className='text-2xl' />
+            <LiaArrowLeftSolid className='text-xl md:text-2xl' />
           </div>
 
           {cards.map((_, index) => (
             <button
               key={index}
-              className={`h-3 w-3 rounded-full ${activeIndex === index ? 'bg-primary' : 'bg-[#D1D3D4]'}`}
+              className={`h-2 w-2 md:h-3 md:w-3 rounded-full ${activeIndex === index ? 'bg-primary' : 'bg-[#D1D3D4]'}`}
               onClick={() => handleButtonClick(index)}
             ></button>
           ))}
 
           <div 
-            className='h-12 w-12 rounded-full hover:text-primary hover:border-primary smooth3 text-[#6A707E] border-[#6A707E] border cursor-pointer flex items-center justify-center'
+            className='h-10 w-10 md:h-12 md:w-12 rounded-full hover:text-primary hover:border-primary smooth3 text-[#6A707E] border-[#6A707E] border cursor-pointer flex items-center justify-center'
             onClick={() => rotateCards('next')}
           >
-            <LiaArrowRightSolid className='text-2xl' />
+            <LiaArrowRightSolid className='text-xl md:text-2xl' />
           </div>
         </div>
       </div>
