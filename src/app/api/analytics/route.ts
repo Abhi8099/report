@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
-import { authOptions } from '../auth/[...nextauth]/route'
+import  {authOptions} from '../auth/[...nextauth]/route'
 
 export async function GET(req:any) {
   console.log("Received request:", req.url)
@@ -91,3 +91,5 @@ export async function GET(req:any) {
     return NextResponse.json({ error: 'Internal server error', details: error.message }, { status: 500 })
   }
 }
+
+
