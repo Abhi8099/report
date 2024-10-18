@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '../auth/[...nextauth]/route'
 
-export async function GET(req) {
+export async function GET(req:any) {
   console.log("Received request:", req.url)
   const session = await getServerSession(authOptions)
   console.log("Session:", JSON.stringify(session, null, 2))
@@ -86,7 +86,7 @@ export async function GET(req) {
       console.error("Invalid action:", action)
       return NextResponse.json({ error: 'Invalid action' }, { status: 400 })
     }
-  } catch (error) {
+  } catch (error:any) {
     console.error('Error:', error)
     return NextResponse.json({ error: 'Internal server error', details: error.message }, { status: 500 })
   }
