@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 import { useSession, signIn, signOut } from "next-auth/react"
 import { useRouter, usePathname } from 'next/navigation'
 import TableOne from "../Tables/TableOne";
-import ProjectHeader from "../ProjectHeader";
+import ProjectHeader from "@/components/ProjectHeader";
 import DataStatsOne from "@/components/DataStats/DataStatsOne";
 import ChartOne from "@/components/Charts/ChartOne";
 import { formatDistanceToNow } from 'date-fns';
 import DefaultLayout from "../Layouts/DefaultLaout";
+import Image from "next/image";
 
 const ECommerce: React.FC = () => {
   const { data: session, status } = useSession()
@@ -55,7 +56,7 @@ const ECommerce: React.FC = () => {
             onClick={handleSignIn}
             className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300"
           >
-            Sign in with Google
+            Connect with Google
           </button>
         </div>
       </DefaultLayout>
@@ -69,9 +70,16 @@ const ECommerce: React.FC = () => {
           console.log("Signing out...")
           signOut({ callbackUrl: pathname })
         }}
-        className="bg-primary hover:bg-red-500 text-white font-bold py-2 px-4 rounded transition duration-300"
+        className="bg-primary hover:bg-red-500 text-white font-bold py-2 px-4 rounded-md transition duration-300"
       >
         Disconnect From Google {session?.user?.name}
+        {/* <Image 
+        src={session?.user?.image}
+        width={30}
+        height={30}
+        alt="te"
+        className="rounded-full"
+        /> */}
       </button>
 
       <div className="mb-4 w-full md:mt-6">

@@ -43,6 +43,7 @@ export default function ProjectHeader() {
 
     if (session) {
       fetchSites()
+      fetchGA4Properties()
       localStorage.setItem('accessTokenGoogle',session?.accessToken );
       setaccessTokenGoogle(session?.accessToken)
       console.log("Retrieved access token:", session.accessToken);
@@ -131,15 +132,55 @@ export default function ProjectHeader() {
     handleCancel();
 };
 
-
-
-
   const handleProjectClick = (project) => {
     localStorage.setItem("selectedProjectId", project.id)
     setSelectedButtonId(project.id)
     setSelectedProject(project)
     showModal()
   }
+
+  const [properties, setProperties] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+
+  const fetchGA4Properties = async () => {
+    console.log("Fetching GA4 properties...")
+    setIsLoading(true)
+
+    try {
+      const res = await fetch('/api/analytics?action=getGA4Properties')
+      console.log("GA4 Properties API response status:", res.status)
+
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`)
+      }
+
+      const data = await res.json()
+      console.log("GA4 Properties data:", data)
+
+      setProperties(data.properties || [])
+    } catch (error) {
+      console.error('Error fetching GA4 properties:', error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+const [fetchedProject, setfetchedProject] = useState()
+  useEffect(() => {
+    if (fetchedProject) {
+      form.setFieldsValue({
+        fetchedProject: fetchedProject.name,
+        projectId: fetchedProject.name.split('/')[1], // Prefill Project ID
+        projectUrl: fetchedProject.displayName, // Prefill Project URL
+      });
+    } else {
+      form.resetFields(); // Reset fields when no project is fetched
+    }
+  }, [fetchedProject, form]); // Update when fetchedProject changes
+
+  const handleProjectChange = (e) => {
+    const fetchedProject = properties.find(p => p.name === e.target.value);
+    setfetchedProject(fetchedProject);
+  };
 
   return (
     <div className='w-full bg-white dark:bg-gray-800 dark:shadow-gray-700 dark:text-white rounded-[10px] px-4 py-3 flex gap-3 overflow-x-auto'>
@@ -170,83 +211,129 @@ export default function ProjectHeader() {
             ))
       : <span className='w-full flex items-center text-red font-medium'>Please Add Your First Project</span>}
 
-<Modal
-  title={selectedProject ? "Edit Project" : "Create Project"}
-  open={isModalVisible}
-  onCancel={handleCancel}
-  footer={null}
->
-  <Form
-    form={form}
-    layout="vertical"
-    onFinish={handleFinish}
+
+      {/* Analytics Modal */}
+      {pathname === "/analytics" && (
+    <Modal
+    title={selectedProject ? "Edit Project" : "Create Project"}
+    open={isModalVisible}
+    onCancel={handleCancel}
+    footer={null}
   >
-    <Form.Item
-      label="Project Name"
-      name="projectName"
-      rules={[{ required: true, message: 'Please enter the Project Name!' }]}
+    <Form
+      layout="vertical"
+      form={form}
+      onFinish={handleFinish}
     >
-      <Input className='py-2 px-4' />
-    </Form.Item>
+      {/* Select Project Dropdown */}
+      <Form.Item
+        label="Select Project"
+        name="fetchedProject"
+        rules={[{ required: true, message: 'Please select a Project!' }]}
+      >
+        <select
+          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          value={fetchedProject ? fetchedProject.name : ""}
+          onChange={handleProjectChange}
+        >
+          <option value="">Select a project</option>
+          {properties.map((project) => (
+            <option key={project.name} value={project.name}>
+              {project.displayName} ({project.name.split('/')[1]})
+            </option>
+          ))}
+        </select>
+      </Form.Item>
 
-    {/* <Form.Item
-      label="Project ID"
-      name="projectId"
-      rules={[
-        { required: true, message: 'Please enter the Project ID!' },
-        { pattern: /^[0-9]*$/, message: 'Project ID must be a number!' }
-      ]}
-    >
-      <Input
-        className='py-2 px-4'
-        disabled={!!selectedProject} 
-        onInput={(e) => {
-          e.target.value = e.target.value.replace(/[^0-9]/g, '');
-        }}
-      />
-    </Form.Item> */}
+      {/* Project ID */}
+      <Form.Item label="Project ID" name="projectId">
+        <Input disabled className='text-black' />
+      </Form.Item>
 
-    {/* <Form.Item
-      label="Project URL"
-      name="projectUrl"
-      rules={[
-        { required: true, message: 'Please enter the Project URL!' },
-        { type: 'url', message: 'Please enter a valid URL!' }
-      ]}
-    >
-      <Input
-        className='py-2 px-4 '
-        disabled={!!selectedProject} 
-      />
-    </Form.Item> */}
-    <Form.Item
-  label="Project URL"
-  name="projectUrl"
-  rules={[{ required: true, message: 'Please select a Project URL!' }]}
->
-  <select
-    className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-    value={selectedSite}
-    onChange={(e) => setSelectedSite(e.target.value)}
-    disabled={!!selectedProject} // Keeps the dropdown disabled if a project is selected
-  >
-    <option value="">Select a site</option>
-    {sites.map((site) => (
-      <option key={site.siteUrl} value={site.siteUrl}>
-        {site.siteUrl}
-      </option>
-    ))}
-  </select>
-</Form.Item>
+      {/* Project URL */}
+      <Form.Item label="Project URL" name="projectUrl">
+        <Input disabled className='text-black' />
+      </Form.Item>
 
-
-    <Form.Item>
+      <Form.Item>
       <Button type="primary" htmlType="submit" className='bg-primary py-2'>
-        {selectedProject ? 'Update And Get Report' : loading ? 'Loading...' : 'Get Report'}
-      </Button>
-    </Form.Item>
-  </Form>
-</Modal>
+          {selectedProject ? 'Update And Get Report' : loading ? 'Loading...' : 'Get Report'}
+        </Button>
+      </Form.Item>
+    </Form>
+  </Modal>
+
+
+      )}
+
+      {/* GSC Modal */}
+      {pathname === "/google-console" && (
+    <Modal
+    title={selectedProject ? "Edit Project" : "Create Project"}
+    open={isModalVisible}
+    onCancel={handleCancel}
+    footer={null}
+  >
+    <Form
+      form={form}
+      layout="vertical"
+      onFinish={handleFinish}
+    >
+      <Form.Item
+        label="Project Name"
+        name="projectName"
+        rules={[{ required: true, message: 'Please enter the Project Name!' }]}
+      >
+        <Input className='py-2 px-4' />
+      </Form.Item>
+  
+      {/* <Form.Item
+        label="Project ID"
+        name="projectId"
+        rules={[
+          { required: true, message: 'Please enter the Project ID!' },
+          { pattern: /^[0-9]*$/, message: 'Project ID must be a number!' }
+        ]}
+      >
+        <Input
+          className='py-2 px-4'
+          disabled={!!selectedProject} 
+          onInput={(e) => {
+            e.target.value = e.target.value.replace(/[^0-9]/g, '');
+          }}
+        />
+      </Form.Item> */}
+  
+      <Form.Item
+    label="Project URL"
+    name="projectUrl"
+    rules={[{ required: true, message: 'Please select a Project URL!' }]}
+  >
+    <select
+      className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+      value={selectedSite}
+      onChange={(e) => setSelectedSite(e.target.value)}
+      disabled={!!selectedProject} // Keeps the dropdown disabled if a project is selected
+    >
+      <option value="">Select a site</option>
+      {sites.map((site) => (
+        <option key={site.siteUrl} value={site.siteUrl}>
+          {site.siteUrl}
+        </option>
+      ))}
+    </select>
+  </Form.Item>
+  
+  
+      <Form.Item>
+        <Button type="primary" htmlType="submit" className='bg-primary py-2'>
+          {selectedProject ? 'Update And Get Report' : loading ? 'Loading...' : 'Get Report'}
+        </Button>
+      </Form.Item>
+    </Form>
+  </Modal>
+      )}
+
 
     </div>
   )

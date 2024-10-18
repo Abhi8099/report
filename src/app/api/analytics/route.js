@@ -14,31 +14,73 @@ export async function GET(req) {
 
   const { searchParams } = new URL(req.url)
   const action = searchParams.get('action')
+
   console.log("Action:", action)
 
   try {
     if (action === 'getGA4Properties') {
       console.log("Fetching GA4 properties list...")
 
-      // Include the filter parameter in the URL
-      const filterValue = encodeURIComponent('display_name:Test Property')
-      const response = await fetch(`https://analyticsadmin.googleapis.com/v1beta/properties?filter=${filterValue}`, {
+      // Step 1: Fetch list of accounts associated with the logged-in Google account
+      const accountsResponse = await fetch(`https://analyticsadmin.googleapis.com/v1beta/accounts`, {
         headers: {
           'Authorization': `Bearer ${session.accessToken}`,
           'Accept': 'application/json',
         },
       })
 
-      if (!response.ok) {
-        const errorText = await response.text()
-        console.error(`Error response from GA API: ${response.status} ${response.statusText}`)
+      if (!accountsResponse.ok) {
+        const errorText = await accountsResponse.text()
+        console.error(`Error response from GA Accounts API: ${accountsResponse.status} ${accountsResponse.statusText}`)
         console.error("Error details:", errorText)
-        return NextResponse.json({ error: 'Failed to fetch GA4 properties' }, { status: response.status })
+        return NextResponse.json({ error: 'Failed to fetch accounts' }, { status: accountsResponse.status })
       }
 
-      const data = await response.json()
-      console.log("GA4 properties response:", JSON.stringify(data, null, 2))
-      return NextResponse.json(data)
+      const accountsData = await accountsResponse.json()
+      const accounts = accountsData.accounts || []
+
+      if (accounts.length === 0) {
+        return NextResponse.json({ message: 'No Google Analytics accounts found' }, { status: 404 })
+      }
+
+      console.log("Accounts found:", JSON.stringify(accounts, null, 2))
+
+      // Step 2: Fetch properties for each account
+      const allProperties = []
+
+      for (const account of accounts) {
+        const accountId = account.name // Format is "accounts/{accountId}"
+        console.log(`Fetching properties for account: ${accountId}`)
+
+        const propertiesResponse = await fetch(`https://analyticsadmin.googleapis.com/v1beta/properties?filter=parent:${accountId}`, {
+          headers: {
+            'Authorization': `Bearer ${session.accessToken}`,
+            'Accept': 'application/json',
+          },
+        })
+
+        if (!propertiesResponse.ok) {
+          const errorText = await propertiesResponse.text()
+          console.error(`Error response from GA Properties API for account ${accountId}: ${propertiesResponse.status} ${propertiesResponse.statusText}`)
+          console.error("Error details:", errorText)
+          continue // Skip to the next account if there is an issue fetching properties
+        }
+
+        const propertiesData = await propertiesResponse.json()
+        const properties = propertiesData.properties || []
+        allProperties.push(...properties)
+      }
+
+      if (allProperties.length === 0) {
+        return NextResponse.json({ message: 'No GA4 properties found' }, { status: 404 })
+      }
+
+      console.log("GA4 properties response:", JSON.stringify(allProperties, null, 2))
+
+      // Extract property IDs (project IDs) and return them
+      const projectIds = allProperties.map(prop => prop.name)
+
+      return NextResponse.json({ projectIds, properties: allProperties })
 
     } else {
       console.error("Invalid action:", action)
