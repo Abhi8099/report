@@ -9,7 +9,7 @@ import { useInView } from 'react-intersection-observer';
 const cards = [
   {
     id: 1,
-    image: "/images/user/user-01.png",
+    image: "/images/user/user-10.png",
     alt: "Image 1",
     text: '"On the Windows talking painted pasture yet its express parties use. Sure last upon he same as knew next. Of believed or diverted no."',
     author: "Dinesh Singh",
@@ -17,7 +17,7 @@ const cards = [
   },
   {
     id: 2,
-    image: "/images/user/user-02.png",
+    image: "/images/user/user-13.png",
     alt: "Image 2",
     text: '"She was amazed at the beautiful landscape. The horizon painted itself with warm colors, and she felt at peace."',
     author: "Priya Sharma",
@@ -25,7 +25,7 @@ const cards = [
   },
   {
     id: 3,
-    image: "/images/user/user-03.png",
+    image: "/images/user/user-12.png",
     alt: "Image 3",
     text: '"The project was a great success, and everyone involved felt a sense of accomplishment."',
     author: "Rohit Verma",

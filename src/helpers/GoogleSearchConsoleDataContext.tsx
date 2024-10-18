@@ -22,7 +22,7 @@ interface GoogleSearchConsoleContextProps {
     pageData: GoogleSearchConsoleData[];
     queryData: GoogleSearchConsoleData[];
     countryData: GoogleSearchConsoleData[];
-    fetchGSCData: (projectId: string, projectUrl: string, dateRange: [string, string]) => void;
+    fetchGSCData: ( accessTokenGoogle:string , projectUrl: string, dateRange: [string, string]) => void;
     loading: boolean;
     predefinedDays: number | null; // Updated type
     setpredefinedDays: React.Dispatch<React.SetStateAction<number | null>>;
@@ -39,19 +39,20 @@ export const GoogleSearchConsoleDataProvider: React.FC<{ children: ReactNode }> 
     const [queryData, setQueryData] = useState<GoogleSearchConsoleData[]>([]);
     const [predefinedDays, setpredefinedDays] = useState<number | null>(null); // Updated state type
 
-    const fetchGSCData = async (projectId: string, projectUrl: string, dateRange: [string, string]) => {
-        console.log(projectId);
+    const fetchGSCData = async ( accessTokenGoogle:string , projectUrl: string, dateRange: [string, string]) => {
+        console.log(accessTokenGoogle);
         console.log(projectUrl);
         console.log(dateRange[0]);
         console.log(dateRange[1]);
         
         setLoading(true); // Show loader during fetching
         try {
-            const response = await axios.post('http://192.168.211.33:8000/api/gsc_data/', {
-                id: projectId,
-                url: projectUrl,
-                start_date: dateRange[0],
-                end_date: dateRange[1]
+            const response = await axios.post('http://192.168.211.33:8000/api/gsc-data/', {
+                // id: projectId,
+                "site_url": projectUrl,
+                "access_token": accessTokenGoogle ,
+                "start_date": dateRange[0],
+                "end_date": dateRange[1]
             });
             toast.success('Fetched Google Search Console Data');
             setData(response.data);

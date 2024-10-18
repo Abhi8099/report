@@ -83,6 +83,7 @@ const Signin = () => {
                 secure: process.env.NODE_ENV === 'production',
                 sameSite: 'Strict',
             });
+            window.location.reload()
             router.push("/google-console");
         } catch (error) {
             console.log(error.response);

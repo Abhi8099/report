@@ -42,7 +42,7 @@ const people = [
 const Banner = () => {
 
     return (
-        <div className='flex flex-col xl:flex-row w-full h-screen xl:pl-60 xl:pt-41'>
+        <div className='flex flex-col xl:flex-row w-full h-screen xl:pl-45 xl:pt-41'>
             <div className='flex flex-col items-start justify-center gap-7 px-5 pt-10 xl:pr-10 xl:pt-0 xl:-mt-20'>
                 <h1 className='text-[30px] sm:text-[36px] lg:text-[45px] xl:text-[55px] text-black font-extrabold leading-tight'>
                     Multiple Reports, <br />

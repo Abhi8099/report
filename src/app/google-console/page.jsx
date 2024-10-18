@@ -7,9 +7,9 @@ import ECommerce from "@/components/Dashboard/E-commerce";
 
 const GoogleConsole = () => {
   return (
-    <DefaultLayout>
+
     <ECommerce />
-  </DefaultLayout>
+
   )
 }
 

@@ -25,7 +25,7 @@ export function FooterFour() {
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
             transition={{ duration: 0.7, staggerChildren: 0.3 }} // Staggering effect
-            className="w-full h-100 flex flex-col gap-4 items-center justify-center pt-12 sm:pt-16 lg:pt-20  bgfooter"
+            className="w-full h-[390px] flex flex-col gap-4 items-center justify-center pt-12 sm:pt-16 lg:pt-20  bgfooter"
         >
             <motion.h3
                 variants={variants}

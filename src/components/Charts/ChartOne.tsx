@@ -92,7 +92,7 @@ const ChartOne: React.FC = () => {
       position: "top",
       horizontalAlign: "left",
     },
-    colors: ["#FF4560", "#008FFB", "#00E396", "#775DD0"],
+    colors: ["#006BD7", "#EF1649", "#1090D0", "#F24A25"],
     chart: {
       fontFamily: "Satoshi, sans-serif",
       height: 310,
@@ -136,13 +136,19 @@ const ChartOne: React.FC = () => {
     xaxis: {
       type: "category",
       categories: categories,
-      axisBorder: {
-        show: false,
-      },
-      axisTicks: {
-        show: false,
+      tickAmount: Math.min(categories.length, 10),
+      labels: {
+        rotate: -45,  // Rotate labels 45 degrees for better fit
+        formatter: function (value) {
+          const date = new Date(value);
+          const day = date.getDate();
+          const month = date.toLocaleString('default', { month: 'short' });
+          return `${day} ${month}`;
+        },
       },
     },
+    
+    
     yaxis: [
       {
         title: {

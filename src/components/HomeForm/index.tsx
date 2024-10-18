@@ -59,7 +59,7 @@ export default function HomeForm() {
 
             {/* Form Section */}
             <form onSubmit={handleSubmit} className="w-full lg:w-1/3 flex flex-col items-center gap-6">
-                <div className="w-full flex flex-col gap-3">
+                <div className="w-full flex items-center justify-center flex-col gap-3">
                     <div>
                         <input
                             type="text"
@@ -85,7 +85,7 @@ export default function HomeForm() {
                 </div>
                 <button
                     type="submit"
-                    className="w-[200px] py-3 px-4 bg-primary text-white rounded-[10px] hover:bg-primary transition duration-300 hover:text-primary hover:bg-white hover:border-primary border border-white smooth3"
+                    className="w-[200px] py-3 px-4 bg-primary text-white rounded-full hover:bg-primary transition duration-300 hover:text-primary hover:bg-white hover:border-primary border border-white smooth3"
                 >
                     Contact Us
                 </button>

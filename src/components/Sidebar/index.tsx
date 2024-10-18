@@ -36,14 +36,14 @@ const menuGroups = [
   {
     name: "REPORT",
     menuItems: [
-//       {
-//         icon: (
-// <BsBarChartFill className="text-2xl" />
-//         ),
-//         label: "Analytics",
-//         route: "/analytics",
+      {
+        icon: (
+<BsBarChartFill className="text-2xl" />
+        ),
+        label: "Analytics",
+        route: "/analytics",
 
-//       },
+      },
       {
         icon: (
 <SiGoogletagmanager  className="text-2xl"/>

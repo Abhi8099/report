@@ -1,55 +1,56 @@
-import React from 'react'
+"use client"
+
+import React, { useEffect, useState } from 'react'
 import DefaultLayout from "@/components/Layouts/DefaultLaout";
-import ECommerce from "@/components/Dashboard/E-commerce";
-import ProjectHeader from '@/components/ProjectHeader';
-import { RiArrowDropDownLine } from 'react-icons/ri';
-import ChartAnalytics from '@/components/Charts/ChartAnalytics';
+import { useSession, signIn, signOut } from "next-auth/react"
 
 
 
 
 const Analytics = () => {
+  const { data: session, status } = useSession()
+  useEffect(() => {
+    console.log("Session status:", status)
+    console.log("Session data:", session)
+    if(session){
+      fetchGA4Properties()
+    }
+
+  }, [session, status])
+
+
+  const [properties, setProperties] = useState([])
+  const [error, setError] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
+
+  const fetchGA4Properties = async () => {
+    console.log("Fetching GA4 properties...")
+    setError(null)
+    setIsLoading(true)
+
+    try {
+      const res = await fetch('/api/analytics?action=getGA4Properties')
+      console.log("GA4 Properties API response status:", res.status)
+
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`)
+      }
+
+      const data = await res.json()
+      console.log("GA4 Properties data:", data)
+
+      setProperties(data.properties || [])
+    } catch (error) {
+      console.error('Error fetching GA4 properties:', error)
+      setError(`Failed to fetch GA4 properties: ${error.message}`)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+  
   return (
-    <DefaultLayout>
-          <div className="mb-4  w-full  md:mt-6 ">
-    <ProjectHeader />
-          </div>
-          <div className="mb-4 flex items-center w-full justify-between  px-4  md:mt-6 ">
-<h3 className="text-2xl font-semibold text-black">Google Analytics:</h3>
-          </div>
-          <div className="mb-4 flex  flex-col items-center w-full   px-11 py-8 h-[607px]  md:mt-6 bg-white rounded-[10px] ">
-          <div className='flex justify-between items-center w-full'>
-  <div className='flex gap-2'>
-    <div className='flex flex-col gap-0.5'>
-      <select name="" id="">
-        <option value="">Active users</option>
-        <option value="">Active users</option>
-        <option value="">Active users</option>
-      </select>
-      <h3>1.2K</h3>
-      <h3>25.8%</h3>
-    </div>
-  </div>
-  <div className="flex justify-end">
-    <button className="bg-[#F8F8F8] text-base flex font-medium text-primary h-[43px] px-4 py-2 rounded">
-      Last 30 days <RiArrowDropDownLine className="text-[26px]" />
-    </button>
-  </div>
-</div>
-<ChartAnalytics/>
-          </div>
-          <div className="mb-4 flex items-center w-full justify-between  px-4  md:mt-6 ">
-<h3 className="text-2xl font-semibold text-black">Suggested for you:</h3>
-          </div>
-<div className='flex justify-between px-11 py-8   md:mt-6'>
-<div className="mb-4 flex flex-[2]  flex-col items-center w-full  bg-white rounded-[10px] ">
+    <DefaultLayout >
 
-            </div>
-          <div className="mb-4 flex flex-1  flex-col items-center w-full  bg-white rounded-[10px] ">
-            
-
-            </div>
-</div>
   </DefaultLayout>
   )
 }

@@ -84,8 +84,10 @@ console.log("res",response);
     }
   };
   const handleGoogleSignIn = () => {
-    signIn('google', { callbackUrl: '/' })
-  }
+    signIn('google', {
+      callbackUrl: 'http://localhost:3000/api/auth/callback/google',
+    });
+  };
 
   return (
 <>

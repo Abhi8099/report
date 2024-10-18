@@ -37,7 +37,7 @@ export const GoogleAnalyticsDataProvider: React.FC<{ children: ReactNode }> = ({
     const fetchAnalyticsData = async (projectId: string, projectUrl: string, dateRange: [string, string]) => {
         setAnalyticsloading(true); // Show loader during fetching
         try {
-            const response = await axios.post('http://192.168.211.33:8000/api/google-analytics-data/', {
+            const response = await axios.post('http://192.168.211.33:8000/api/google-analytics-data', {
                 project_id: projectId,
                 url: projectUrl,
                 start_date: dateRange[0],

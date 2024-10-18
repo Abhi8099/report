@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { FaPlus } from 'react-icons/fa6'
+import { useSession, signIn, signOut } from "next-auth/react"
 import { Modal, Form, Input, Button } from 'antd'
 import { useProjectContext } from '@/helpers/ProjectContext'
 import { useGoogleSearchConsoleData } from "@/helpers/GoogleSearchConsoleDataContext"
@@ -11,6 +12,12 @@ import dayjs from 'dayjs'
 
 export default function ProjectHeader() {
   const [form] = Form.useForm()
+  const { data: session, status } = useSession()
+  const [sites, setSites] = useState([])
+  const [selectedSite, setSelectedSite] = useState("")
+  const [data, setData] = useState(null)
+  const [error, setError] = useState(null)
+  const [accessTokenGoogle, setaccessTokenGoogle] = useState("")
   const {
     projects,
     isModalVisible,
@@ -26,6 +33,42 @@ export default function ProjectHeader() {
     selectedButtonId,
     createdId
   } = useProjectContext()
+
+  console.log(projects);
+  
+  useEffect(() => {
+    console.log("Session status:", status)
+    console.log("Session data:", session)
+
+
+    if (session) {
+      fetchSites()
+      localStorage.setItem('accessTokenGoogle',session?.accessToken );
+      setaccessTokenGoogle(session?.accessToken)
+      console.log("Retrieved access token:", session.accessToken);
+    }
+  }, [session, status])
+
+  const fetchSites = async () => {
+
+    setError(null)
+    console.log("Fetching sites...")
+    try {
+      const res = await fetch('/api/search-console?action=getSites')
+      console.log("Sites API response status:", res.status)
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`)
+      }
+      const data = await res.json()
+      console.log("Sites data:", data)
+      setSites(data.siteEntry || [])
+    } catch (error) {
+      console.error('Error fetching sites:', error)
+      setError(`Failed to fetch sites: ${error.message}`)
+    } finally {
+
+    }
+  }
 
   const pathname = usePathname()
   const { fetchGSCData } = useGoogleSearchConsoleData()
@@ -80,7 +123,7 @@ export default function ProjectHeader() {
     if (pathname === "/analytics") {
         fetchAnalyticsData(projectId, projectUrl, [startDate, endDate]);
     } else if (pathname === "/google-console") {
-        fetchGSCData(projectId, projectUrl, [startDate, endDate]);
+        fetchGSCData(accessTokenGoogle, projectUrl, [startDate, endDate]);
     }
 
     localStorage.setItem("selectedProjectId", updatedProjectId);
@@ -110,19 +153,22 @@ export default function ProjectHeader() {
         Project <FaPlus className='text-xl' />
       </button>
       <div className='w-[1px] border bg-gray-6 '></div>
-      {projects.map((project) => (
-        <button
-          key={project.id}
-          className={`flex min-w-fit gap-2 items-center border border-2 text-base font-medium px-6 py-1.5 rounded-full smooth1  ${
-            selectedButtonId === project.id
-              ? "bg-primary text-white border-primary"
-              : "bg-gray-200 text-black border-gray hover:border-primary hover:text-white hover:bg-primary dark:bg-gray-800 dark:border-gray-600 dark:text-white"
-          }`}
-          onClick={() => handleProjectClick(project)}
-        >
-          {project.project_name}
-        </button>
-      ))}
+
+      {projects.length > 0  ?
+            projects.map((project) => (
+              <button
+                key={project.id}
+                className={`flex min-w-fit gap-2 items-center border border-2 text-base font-medium px-6 py-1.5 rounded-full smooth1  ${
+                  selectedButtonId === project.id
+                    ? "bg-primary text-white border-primary"
+                    : "bg-gray-200 text-black border-gray hover:border-primary hover:text-white hover:bg-primary dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+                }`}
+                onClick={() => handleProjectClick(project)}
+              >
+                {project.project_name}
+              </button>
+            ))
+      : <span className='w-full flex items-center text-red font-medium'>Please Add Your First Project</span>}
 
 <Modal
   title={selectedProject ? "Edit Project" : "Create Project"}
@@ -143,7 +189,7 @@ export default function ProjectHeader() {
       <Input className='py-2 px-4' />
     </Form.Item>
 
-    <Form.Item
+    {/* <Form.Item
       label="Project ID"
       name="projectId"
       rules={[
@@ -158,9 +204,9 @@ export default function ProjectHeader() {
           e.target.value = e.target.value.replace(/[^0-9]/g, '');
         }}
       />
-    </Form.Item>
+    </Form.Item> */}
 
-    <Form.Item
+    {/* <Form.Item
       label="Project URL"
       name="projectUrl"
       rules={[
@@ -172,7 +218,27 @@ export default function ProjectHeader() {
         className='py-2 px-4 '
         disabled={!!selectedProject} 
       />
-    </Form.Item>
+    </Form.Item> */}
+    <Form.Item
+  label="Project URL"
+  name="projectUrl"
+  rules={[{ required: true, message: 'Please select a Project URL!' }]}
+>
+  <select
+    className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+    value={selectedSite}
+    onChange={(e) => setSelectedSite(e.target.value)}
+    disabled={!!selectedProject} // Keeps the dropdown disabled if a project is selected
+  >
+    <option value="">Select a site</option>
+    {sites.map((site) => (
+      <option key={site.siteUrl} value={site.siteUrl}>
+        {site.siteUrl}
+      </option>
+    ))}
+  </select>
+</Form.Item>
+
 
     <Form.Item>
       <Button type="primary" htmlType="submit" className='bg-primary py-2'>

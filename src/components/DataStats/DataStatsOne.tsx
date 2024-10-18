@@ -8,6 +8,7 @@ import { TbCirclePercentage } from "react-icons/tb";
 import { Skeleton } from '@mui/material';
 import millify from "millify";
 import dayjs from 'dayjs';
+import { useSession, signIn, signOut } from "next-auth/react"
 
 import { Modal, Form, Input, DatePicker, Button, Select } from 'antd';
 import { usePathname } from "next/navigation";
@@ -34,7 +35,17 @@ const DataStatCard: React.FC<{ item: any }> = ({ item }) => (
 );
 
 const DataStatsOne: React.FC<dataStats> = () => {
-
+  const { data: session, status } = useSession()
+  const [accessTokenGoogle, setaccessTokenGoogle] = useState("")
+  useEffect(() => {
+    console.log("Session status:", status)
+    console.log("Session data:", session)
+    if (session) {
+      localStorage.setItem('accessTokenGoogle',session?.accessToken );
+      setaccessTokenGoogle(session?.accessToken)
+      console.log("Retrieved access token:", session.accessToken);
+    }
+  }, [session, status])
   const{
     projects,
     isModalVisible,
@@ -65,7 +76,7 @@ const DataStatsOne: React.FC<dataStats> = () => {
     if (dates) {
       const startDate = dates[0].format('YYYY-MM-DD');
       const endDate = dates[1].format('YYYY-MM-DD');
-      fetchGSCData(selectedProject?.project_id, selectedProject?.project_url, [startDate, endDate]); // Replace with actual project ID and URL
+      fetchGSCData(accessTokenGoogle, selectedProject?.project_url, [startDate, endDate]); // Replace with actual project ID and URL
     }
   };
 
@@ -78,44 +89,44 @@ const DataStatsOne: React.FC<dataStats> = () => {
     form.setFieldsValue({
       dateRange: [startDate, endDate],
     });
-    fetchGSCData(selectedProject?.project_id, selectedProject?.project_url, [startDate, endDate]); // Replace with actual project ID and URL
+    fetchGSCData(accessTokenGoogle, selectedProject?.project_url, [startDate, endDate]); // Replace with actual project ID and URL
   };
 
 
   
 
   // Calculate data only if dateData is not empty
-  const totalClicks = dateData.length > 0 ? dateData.reduce((acc, { clicks }) => acc + clicks, 0) : 0;
-  const totalImpressions = dateData.length > 0 ? dateData.reduce((acc, { impressions }) => acc + impressions, 0) : 0;
-  const averageCtr = dateData.length > 0 ? (dateData.reduce((acc, { ctr }) => acc + ctr, 0) / dateData.length) : 0;
-  const averagePosition = dateData.length > 0 ? (dateData.reduce((acc, { position }) => acc + position, 0) / dateData.length) : 0;
+  const totalClicks = dateData?.length > 0 ? dateData.reduce((acc, { clicks }) => acc + clicks, 0) : 0;
+  const totalImpressions = dateData?.length > 0 ? dateData.reduce((acc, { impressions }) => acc + impressions, 0) : 0;
+  const averageCtr = dateData?.length > 0 ? (dateData.reduce((acc, { ctr }) => acc + ctr, 0) / dateData.length) : 0;
+  const averagePosition = dateData?.length > 0 ? (dateData.reduce((acc, { position }) => acc + position, 0) / dateData?.length) : 0;
 
   const dataStatsList = [
     {
       icon: <MdOutlineAdsClick className="text-xl" />,
       color: "#fff",
-      bg: "#134FB5",
+      bg: "#006BD7",
       title: "Total Clicks",
       value: totalClicks,
     },
     {
       icon: <MdOutlineAutoGraph className="text-xl" />,
       color: "#fff",
-      bg: "#5E35B1",
+      bg: "#EF1649",
       title: "Total Impressions",
       value: millify(totalImpressions),
     },
     {
       icon: <TbCirclePercentage className="text-xl" />,
       color: "#fff",
-      bg: "#00897B",
+      bg: "#1090D0",
       title: "Average CTR",
       value: averageCtr.toFixed(3),
     },
     {
       icon: <MdGraphicEq className="text-xl" />,
       color: "#fff",
-      bg: "#E8710A",
+      bg: "#F24A25",
       title: "Average Position",
       value: averagePosition.toFixed(3),
     },

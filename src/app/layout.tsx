@@ -4,6 +4,7 @@ import "flatpickr/dist/flatpickr.min.css";
 import "@/css/satoshi.css";
 import "@/css/style.css";
 import React, { useEffect, useState } from "react";
+import { SessionProvider } from 'next-auth/react';
 import Loader from "@/components/common/Loader";
 import { GoogleSearchConsoleDataProvider } from "@/helpers/GoogleSearchConsoleDataContext"
 import { Toaster } from 'react-hot-toast';
@@ -26,6 +27,7 @@ export default function RootLayout({
   }, []);
 
   return (
+    <SessionProvider>
     <html lang="en">
       <body suppressHydrationWarning={true}>
       <Toaster />
@@ -40,5 +42,6 @@ export default function RootLayout({
         </ProfileProvider>
       </body>
     </html>
+    </SessionProvider>
   );
 }

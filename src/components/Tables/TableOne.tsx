@@ -32,20 +32,18 @@ export default function TableOne() {
   const getTopQueriesTitle = () => {
     switch (activeTab) {
       case '1':
-        return 'Date'; // For Queries tab
+        return 'Date'; 
       case '2':
-        return 'Top Queries'; // For Queries tab
+        return 'Top Queries'; 
       case '3':
-        return 'Top Pages'; // For Pages tab
+        return 'Top Pages';
       case '4':
-        return 'Top Countries'; // For Countries tab
+        return 'Top Countries';
       default:
-        return 'Top Queries'; // Fallback title
+        return 'Top Queries';
     }
   };
 
-
-  // Defining the columns for the table
   const columns: ColumnsType<TableData> = [
     {
       title: getTopQueriesTitle(),
@@ -60,7 +58,7 @@ export default function TableOne() {
       dataIndex: 'clicks',
       key: 'clicks',
       render: (clicks: any) => (
-        <span className="font-medium text-base">{clicks}</span>
+        <span className="font-medium text-[#006BD7] text-base">{clicks}</span>
       ),
     },
     {
@@ -68,11 +66,11 @@ export default function TableOne() {
       dataIndex: 'impressions',
       key: 'impressions',
       render: (impressions: any) => {
-        const numericImpressions = parseFloat(impressions); // Convert to number
-        console.log('Raw impressions value:', impressions, 'Numeric impressions:', numericImpressions);
+        const numericImpressions = parseFloat(impressions); 
+        // console.log('Raw impressions value:', impressions, 'Numeric impressions:', numericImpressions);
         return (
-          <span className="text-[#5E35B1] font-medium text-base">
-            {millify(numericImpressions)} {/* Use millify directly */}
+          <span className="text-[#EF1649] font-medium text-base">
+            {millify(numericImpressions)}
           </span>
         );
       },
@@ -83,7 +81,7 @@ export default function TableOne() {
       dataIndex: 'ctr',
       key: 'ctr',
       render: (ctr: any) => (
-        <span className="text-[#00897B] font-medium text-base">{ctr}</span>
+        <span className="text-[#1090D0] font-medium text-base">{ctr}</span>
       ),
     },
     {
@@ -91,7 +89,7 @@ export default function TableOne() {
       dataIndex: 'position',
       key: 'position',
       render: (position: any) => (
-        <span className="text-[#E8710A] font-medium text-base">{position}</span>
+        <span className="text-[#F24A25] font-medium text-base">{position}</span>
       ),
     },
   ];
