@@ -1,16 +1,12 @@
-"use client"
-import React from 'react'
-import DefaultLayout from "@/components/Layouts/DefaultLaout";
-import ECommerce from "@/components/Dashboard/E-commerce";
+
+import dynamic from 'next/dynamic';
+
+const ECommerce = dynamic(() => import('@/components/Dashboard/E-commerce'), {
+  ssr: false
+});
+
+const GoogleConsole = () => <ECommerce />;
+
+export default GoogleConsole;
 
 
-
-const GoogleConsole = () => {
-  return (
-
-    <ECommerce />
-
-  )
-}
-
-export default GoogleConsole
