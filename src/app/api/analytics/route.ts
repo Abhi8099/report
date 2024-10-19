@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
-import  {authOptions} from '../auth/[...nextauth]/route'
+import  {authOptions} from '../auth/[...nextauth]/auth'
 
 export async function GET(req:any) {
   console.log("Received request:", req.url)
