@@ -1,4 +1,4 @@
-"use client"
+  "use client"
 import React, { useState } from 'react';
 import HeaderComp from "@/components/HeaderComp";
 import { FooterFour } from "@/components/Footer";
@@ -143,12 +143,12 @@ console.log("res",response);
           >
             Create Account
           </button>
-          <button
+          {/* <button
       onClick={handleGoogleSignIn}
             className='w-full py-3 border gap-2 border-primary text-primary flex items-center justify-center disabled:opacity-50 rounded-lg disabled:cursor-not-allowed'
           >
             <FcGoogle className='text-xl' />Sign Up With Google
-          </button>
+          </button> */}
           <h3 className='text-center text-[#948F8F] font-medium w-full flex items-center justify-center gap-2'>
             Already have an account? <Link href={"/signin"} className='text-primary font-semibold hover:scale-105 hover:underline smooth3'>Login</Link>
           </h3>

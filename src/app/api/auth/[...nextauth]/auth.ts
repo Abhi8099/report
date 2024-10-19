@@ -16,9 +16,9 @@ export const authOptions: NextAuthOptions = {
             }
         }),
     ],
-    pages: {
-        signIn: '/google-console',
-    },
+    // pages: {
+    //     signIn: '/auth',
+    // },
     callbacks: {
         async jwt({ token, account }) {
             console.log("JWT Callback - Token:", token)

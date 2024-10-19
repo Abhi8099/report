@@ -61,8 +61,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const pathname = usePathname();
   const router = useRouter()
   const handleLogout = async () => {
-    const token = Cookies.get("login_access_token");
-    const refresh_token = Cookies.get("login_refresh_token");
+    const token = Cookies.get("login_access_token_report");
+    const refresh_token = Cookies.get("login_refresh_token_report");
     try {
       await axios.post(`${BASE_URL}logout/`, {"refresh_token":refresh_token}, {
         headers: {
@@ -72,9 +72,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       });
       localStorage.clear();
       sessionStorage.clear();
-      Cookies.remove('login_access_token');
-      localStorage.removeItem("login_access_token");
-      localStorage.removeItem("login_refresh_token");
+      Cookies.remove('login_access_token_report');
+      localStorage.removeItem("login_access_token_report");
+      localStorage.removeItem("login_refresh_token_report");
       localStorage.removeItem("login_user");
       window.history.pushState(null, "", window.location.href);
       window.addEventListener("popstate", () => {

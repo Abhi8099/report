@@ -1,4 +1,4 @@
-
+"use client"
 import React from 'react'
 import DefaultLayout from "@/components/Layouts/DefaultLaout";
 import ECommerce from "@/components/Dashboard/E-commerce";

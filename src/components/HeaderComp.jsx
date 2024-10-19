@@ -10,7 +10,7 @@ import Link from "next/link"
 import { motion } from "framer-motion"
 
 export default function Navbar() {
-    const token = Cookies.get('login_access_token')
+    const token = Cookies.get('login_access_token_report')
     const pathname = usePathname()
     const [menuOpen, setMenuOpen] = useState(false)
     const [isScrolled, setIsScrolled] = useState(false)

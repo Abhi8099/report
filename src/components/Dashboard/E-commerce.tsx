@@ -9,6 +9,8 @@ import ChartOne from "@/components/Charts/ChartOne";
 import { formatDistanceToNow } from 'date-fns';
 import DefaultLayout from "../Layouts/DefaultLaout";
 import Image from "next/image";
+import { FcGoogle } from "react-icons/fc";
+
 
 const ECommerce: React.FC = () => {
   const { data: session, status } = useSession()
@@ -51,12 +53,13 @@ const ECommerce: React.FC = () => {
     return (
       <DefaultLayout>
         <div className="flex flex-col items-center justify-center min-h-[80vh] bg-gray-100">
-          <h1 className="text-2xl font-bold mb-4">Connect to Google Search Console</h1>
+          <h1 className="text-2xl font-bold mb-4 flex gap-2 items-center">Connect to Google Search Console</h1>
           <button
             onClick={handleSignIn}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300"
+            className="bg-blue-500 flex items-center gap-2 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300"
           >
-            Connect with Google
+            Connect with <FcGoogle className="text-2xl bg-white rounded-full" />
+
           </button>
         </div>
       </DefaultLayout>
@@ -65,30 +68,30 @@ const ECommerce: React.FC = () => {
 
   return (
     <DefaultLayout>
-      <button
+        <div className="flex justify-between items-center">
+          <h1 className="text-2xl font-bold ">Google Search Console Dashboard</h1>
+          <button
         onClick={() => {
           console.log("Signing out...")
           signOut({ callbackUrl: pathname })
         }}
-        className="bg-primary hover:bg-red-500 text-white font-bold py-2 px-4 rounded-md transition duration-300"
+        className="bg-primary hover:bg-red-500 text-white font-bold py-1.5 px-4 rounded-md flex gap-2 items-center transition duration-300"
       >
         Disconnect From Google {session?.user?.name}
-        {/* <Image 
-        src={session?.user?.image}
-        width={30}
-        height={30}
-        alt="te"
-        className="rounded-full"
-        /> */}
+        <Image 
+  src={session?.user?.image ?? '/images/user/user-20.png'}  // Replace with a valid fallback image path
+  width={30}
+  height={30}
+  alt="te"
+  className="rounded-full"
+/>
       </button>
+        </div>
 
       <div className="mb-4 w-full md:mt-6">
         <ProjectHeader  />
       </div>
-      <div className="mb-4 flex items-center w-full justify-between px-4 md:mt-6">
-        <h3 className="text-2xl font-semibold text-black dark:text-white">Google search console:</h3>
-        <h3 className="text-sm font-semibold">Last update: {formatDistanceToNow(currentTime, { addSuffix: true })}</h3>
-      </div>
+
       <div className='bg-white dark:bg-gray-dark p-7 rounded-[10px]'>
         <DataStatsOne />
       </div>

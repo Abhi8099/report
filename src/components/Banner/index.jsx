@@ -56,8 +56,12 @@ const Banner = () => {
                 <div className='flex flex-col gap-2'>
                     <h3 className='text-sm sm:text-base text-black font-semibold'>Integrated Platforms</h3>
                     <Image
+                    rel='pre'
                         src={"/images/new/Group 1000004888.svg"}
                         alt="new"
+                        loading='eager'
+                        decoding='async'
+                        priority='true'
                         width={100}
                         height={100}
                     />

@@ -147,7 +147,9 @@ export default function ProjectHeader() {
     setIsLoading(true)
 
     try {
-      const res = await fetch('/api/analytics?action=getGA4Properties')
+      const res = await fetch('/api/analytics?action=getGA4Properties' , {
+        cache:'force-cache'
+      })
       console.log("GA4 Properties API response status:", res.status)
 
       if (!res.ok) {
@@ -183,7 +185,10 @@ const [fetchedProject, setfetchedProject] = useState()
   };
 
   return (
-    <div className='w-full bg-white dark:bg-gray-800 dark:shadow-gray-700 dark:text-white rounded-[10px] px-4 py-3 flex gap-3 overflow-x-auto'>
+    <div className='w-full bg-white dark:bg-gray-800 dark:shadow-gray-700 dark:text-white rounded-[10px] px-4 pt-2 pb-3 flex flex-col gap-2'>
+    <p className='text-sm font-medium text-primary'>Create a new project Or select an existing project!</p>
+
+    <div className=' flex gap-3 overflow-x-auto'>
       <button
         className='flex gap-2 items-center border border-2 border-primary px-6 py-1.5 text-primary rounded-full'
         onClick={() => {
@@ -247,12 +252,12 @@ const [fetchedProject, setfetchedProject] = useState()
 
       {/* Project ID */}
       <Form.Item label="Project ID" name="projectId">
-        <Input disabled className='text-black' />
+        <Input disabled className='py-2 px-4' />
       </Form.Item>
 
       {/* Project URL */}
       <Form.Item label="Project URL" name="projectUrl">
-        <Input disabled className='text-black' />
+        <Input disabled className='py-2 px-4' />
       </Form.Item>
 
       <Form.Item>
@@ -310,7 +315,7 @@ const [fetchedProject, setfetchedProject] = useState()
     rules={[{ required: true, message: 'Please select a Project URL!' }]}
   >
     <select
-      className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+      className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:cursor-not-allowed disabled:bg-gray-200"
       value={selectedSite}
       onChange={(e) => setSelectedSite(e.target.value)}
       disabled={!!selectedProject} // Keeps the dropdown disabled if a project is selected
@@ -335,6 +340,7 @@ const [fetchedProject, setfetchedProject] = useState()
       )}
 
 
+    </div>
     </div>
   )
 }

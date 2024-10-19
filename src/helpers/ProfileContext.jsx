@@ -1,4 +1,4 @@
-
+"use client"
 import React, { createContext, useState, useContext } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
@@ -18,7 +18,7 @@ export const ProfileProvider = ({ children }) => {
     // Function to fetch profile
     const fetchProfile = async () => {
         setLoading(true);
-        const token = Cookies.get("login_access_token");
+        const token = Cookies.get("login_access_token_report");
         try {
             const response = await axios.get(`${BASE_URL}api/current_user/`, {
                 headers: {

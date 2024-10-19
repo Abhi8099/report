@@ -14,7 +14,7 @@
 
 //   ];
 //   const authPaths = ['/signin', '/signup'];
-//   const token = request.cookies.get('login_access_token');
+//   const token = request.cookies.get('login_access_token_report');
 //   if (protectedPaths.includes(path) && !token) {
 //     return NextResponse.redirect(new URL('/signin', request.nextUrl));
 //   }
@@ -65,7 +65,7 @@ export async function middleware(request: NextRequest) {
   const tokenFromAuth = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
   
   // Get the token from cookies
-  const tokenFromCookie = request.cookies.get('login_access_token');
+  const tokenFromCookie = request.cookies.get('login_access_token_report');
 
   // Check if the user has any valid token (JWT or cookie token)
   const isAuthenticated = tokenFromAuth || tokenFromCookie;

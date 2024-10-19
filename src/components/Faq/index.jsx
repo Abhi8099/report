@@ -79,7 +79,7 @@ const Faq = () => {
                                 animate={{ opacity: 1, height: "auto" }} // When opened
                                 exit={{ opacity: 0, height: 0 }} // When closed
                                 transition={{ duration: 0.5 }} // Smooth animation duration
-                                className="mt-4 text-gray-600 ml-8 sm:ml-12 md:ml-16 lg:ml-20"
+                                className="mt-4 text-gray-600 ml-8 2xl:ml-39 sm:ml-12 md:ml-16 lg:ml-20 "
                             >
                                 <p>{question.description}</p>
                             </motion.div>

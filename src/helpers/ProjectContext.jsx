@@ -20,7 +20,7 @@ export const ProjectProvider = ({ children }) => {
 
     const fetchProjects = async () => {
         setLoading(true);
-        const token = Cookies.get("login_access_token");
+        const token = Cookies.get("login_access_token_report");
         try {
             const response = await axios.get(`${BASE_URL}project/`, {
                 headers: {
@@ -47,7 +47,7 @@ export const ProjectProvider = ({ children }) => {
     const createProject = async (postData) => {
         console.log(lastProject);
         
-        const token = Cookies.get("login_access_token");
+        const token = Cookies.get("login_access_token_report");
         try {
             const response = await axios.post(`${BASE_URL}project/`, postData, {
                 headers: {
@@ -82,7 +82,7 @@ export const ProjectProvider = ({ children }) => {
 
     };
     const updateProject = async (projectId, postData2) => {
-        const token = Cookies.get("login_access_token");
+        const token = Cookies.get("login_access_token_report");
         try {
             const response = await axios.put(`${BASE_URL}project/${projectId}/`, postData2, {
                 headers: {

@@ -70,14 +70,14 @@ const Signin = () => {
 
             // console.log("res", response);
             toast.success("Signin successful");
-            Cookies.set('login_access_token', response.data.access, {
+            Cookies.set('login_access_token_report', response.data.access, {
                 expires: 1,  // Token expiration (1 day in this case)
                 path: '/',
                 secure: process.env.NODE_ENV === 'production',  // Send cookie over HTTPS only in production
                 sameSite: 'Strict',  // Protect against CSRF
             });
 
-            Cookies.set('login_refresh_token', response.data.refresh, {
+            Cookies.set('login_refresh_token_report', response.data.refresh, {
                 expires: 7,  // Refresh token expiration (e.g., 7 days)
                 path: '/',
                 secure: process.env.NODE_ENV === 'production',
