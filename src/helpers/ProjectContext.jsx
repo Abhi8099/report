@@ -3,19 +3,25 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { BASE_URL } from '@/utils/api';
+import toast from 'react-hot-toast';
 
 const ProjectContext = createContext();
 
 export const ProjectProvider = ({ children }) => {
+
+
     const [projects, setProjects] = useState([]);
+    console.log(projects.length);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [selectedProject, setSelectedProject] = useState(null);
+console.log(selectedProject);
+
     const [loading, setLoading] = useState(false);
     const [createdId, setCreatedId] = useState("")
     const [selectedButtonId, setSelectedButtonId] = useState(null)
     const [lastProject, setLastProject] = useState("")
-    console.log(createdId);
-    console.log(lastProject);
+    // console.log(createdId);
+    // console.log(lastProject);
     
 
     const fetchProjects = async () => {
@@ -64,14 +70,21 @@ export const ProjectProvider = ({ children }) => {
             setSelectedButtonId(newProject.project_id)
             fetchProjects(); 
             setSelectedProject(lastProject);
-        } catch (error) {
+    toast.success("Project Created")
+
+        }catch (error) {
             console.error("Error creating project: ", error);
-        } finally {
+            const errorMessage = error.response?.data?.project_url || "An unknown error occurred.";
+            toast.error(errorMessage);
+        }
+         finally {
             handleCancel(); // Always execute handleCancel
         }
     };
     
-    
+    useEffect(() => {
+        localStorage.setItem("selectedProjectId", createdId);
+    },[createdId])
 
     const showModal = () => {
         setIsModalVisible(true);
@@ -82,6 +95,9 @@ export const ProjectProvider = ({ children }) => {
 
     };
     const updateProject = async (projectId, postData2) => {
+        console.log(projectId);
+        console.log(postData2);
+        
         const token = Cookies.get("login_access_token_report");
         try {
             const response = await axios.put(`${BASE_URL}project/${projectId}/`, postData2, {
@@ -91,9 +107,12 @@ export const ProjectProvider = ({ children }) => {
                 },
             });
             console.log("Project updated successfully: ", response.data);
+    toast.success("Project Updated")
             fetchProjects(); // Refresh projects after update
         } catch (error) {
             console.error("Error updating project: ", error);
+            const errorMessage = error.response?.data?.project_url || "An unknown error occurred.";
+            toast.error(errorMessage);
         } finally {
             handleCancel();
         }

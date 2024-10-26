@@ -526,3 +526,18 @@ input:-webkit-autofill {
     background-position: center;
     background-repeat: no-repeat;
 }
+.custom-select {
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid;
+    border-color: #006BD7 !important;
+  }
+  :where(.css-dev-only-do-not-override-ccdg5a).ant-select-outlined:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer):hover .ant-select-selector{
+    border: 1px solid;
+    border-color: #ff000000 !important;
+  }
+
+  .ant-select-focused:where(.css-dev-only-do-not-override-ccdg5a).ant-select-outlined:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer) .ant-select-selector{
+    border: 1px solid;
+    border-color: #ff000000 !important;
+  }

@@ -51,10 +51,9 @@ export default function Navbar() {
                                     smooth={true}
                                     duration={500}
                                     className={`navLink text-black font-semibold ${pathname === `/${item.link}/` ? "active" : ""}`}
+                                    href={item.href}
                                 >
-                                    <Link href={item.href}>
-                                        {item.page}
-                                    </Link>
+                                    {item.page}
                                 </ScrollLink>
                                 {item.submenu && (
                                     <div className="absolute hidden group-hover:block bg-white shadow-lg mt-1 rounded-lg w-64">
@@ -112,10 +111,9 @@ export default function Navbar() {
                                     duration={500}
                                     className={`text-gray-700 hover:text-blue-500 flex items-center justify-center py-3 rounded-lg ${pathname === `/${item.link}` ? "font-bold" : ""}`}
                                     onClick={() => setMenuOpen(false)}
+                                    href={item.href}
                                 >
-                                    <Link href={`/`}>
-                                        {item.page}
-                                    </Link>
+                                    {item.page}
                                 </ScrollLink>
                                 {item.submenu && (
                                     <div className="bg-gray-100 mt-2 rounded-lg w-full flex items-center justify-center flex-col">

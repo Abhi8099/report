@@ -9,7 +9,7 @@ import { ProfileProvider } from "@/helpers/ProfileContext";
 import React from 'react'
 
 export default function Providers({children }: {children :React.ReactNode}) {
-return     <SessionProvider>
+return  <>  <SessionProvider>
 <Toaster />
 <ProfileProvider>
 <ProjectProvider>
@@ -20,6 +20,6 @@ return     <SessionProvider>
   </GoogleAnalyticsDataProvider>
   </ProjectProvider>
   </ProfileProvider>
-</SessionProvider>
+</SessionProvider></> 
 
 }

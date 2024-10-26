@@ -98,7 +98,7 @@ const ChartOne: React.FC = () => {
       height: 310,
       type: "line",
       toolbar: {
-        show: false,
+        show: true,
       },
     },
     stroke: {
@@ -106,7 +106,13 @@ const ChartOne: React.FC = () => {
       width: [2, 2, 2, 2],
     },
     markers: {
-      size: 0,
+      size: 4,
+      colors: ["#006BD7", "#EF1649", "#1090D0","#F24A25",],
+      strokeColors: "#fff",
+      strokeWidth: 2,
+      hover: {
+        size: 7,
+      },
     },
     grid: {
       strokeDashArray: 5,

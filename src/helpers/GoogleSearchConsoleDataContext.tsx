@@ -54,7 +54,7 @@ export const GoogleSearchConsoleDataProvider: React.FC<{ children: ReactNode }> 
                 "start_date": dateRange[0],
                 "end_date": dateRange[1]
             });
-            toast.success('Fetched Google Search Console Data');
+            toast.success(`Fetched Google Search Console Data `);
             setData(response.data);
             setdateData(response.data.date_data);
             setcountryData(response.data.country_data);

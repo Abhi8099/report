@@ -150,21 +150,21 @@ const DataStatsOne: React.FC<dataStats> = () => {
 
 <div className="flex flex-1 flex-col justify-between gap-4 items-center w-full  col-span-full">
       {/* Select Dropdown */}
-      <div className="w-3/4">
+      <div className="w-full">
         <Select
           defaultValue={7}
           onChange={handlePredefinedRangeChange}
-          className="w-full border border-gray-300 rounded-md text-lg"
+          className="w-full border border-black text-black font-bold rounded-md text-lg"
         >
-          <Option value={7}>Last 7 days</Option>
-          <Option value={16}>Last 16 days</Option>
-          <Option value={30}>Last 30 days</Option>
+          <Option  value={7}>Last 7 days</Option>
+          <Option  value={16}>Last 16 days</Option>
+          <Option  value={30}>Last 30 days</Option>
         </Select>
       </div>
 
       {/* Conditionally show Date Range Picker */}
       {showRangePicker && (
-        <div className="w-3/4 dark:text-white">
+        <div className="w-full dark:text-white">
           <Form.Item
             label="Select Date Range"
             name="dateRange"
@@ -172,7 +172,7 @@ const DataStatsOne: React.FC<dataStats> = () => {
             className=" dark:text-white"
           >
             <RangePicker
-              className="py-1 px-4 w-full border border-gray-300 rounded-md text-lg"
+              className="py-1 px-4 w-full border border-black text-black  rounded-md text-lg"
               onChange={handleDateChange}
             />
           </Form.Item>

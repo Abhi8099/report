@@ -13,16 +13,19 @@ interface GoogleAnalyticsData {
     avgSessionDuration: number;
     date: any;
     country: any;
+
     pagePath: any;
 }
 
 interface GoogleAnalyticsContextProps {
-    analyticsData: GoogleAnalyticsData[];
+    analyticsData: any;
     dateAnalyticsData: GoogleAnalyticsData[];
     countryAnalyticsData: GoogleAnalyticsData[];
     pageAnalyticsData: GoogleAnalyticsData[];
-    fetchAnalyticsData: (projectId: string, projectUrl: string, dateRange: [string, string]) => void;
+    fetchAnalyticsData: (accessTokenGoogle:string, propertyId: string, dateRange: [string, string]) => void;
     Analyticsloading: boolean;
+    predefinedDays: number | null; // Updated type
+    setpredefinedDays: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
 const GoogleAnalyticsDataContext = createContext<GoogleAnalyticsContextProps | undefined>(undefined);
@@ -33,15 +36,21 @@ export const GoogleAnalyticsDataProvider: React.FC<{ children: ReactNode }> = ({
     const [dateAnalyticsData, setDateAnalyticsData] = useState<GoogleAnalyticsData[]>([]);
     const [countryAnalyticsData, setCountryAnalyticsData] = useState<GoogleAnalyticsData[]>([]);
     const [pageAnalyticsData, setPageAnalyticsData] = useState<GoogleAnalyticsData[]>([]);
+    const [predefinedDays, setpredefinedDays] = useState<number | null>(null); 
 
-    const fetchAnalyticsData = async (projectId: string, projectUrl: string, dateRange: [string, string]) => {
+    const fetchAnalyticsData = async (accessTokenGoogle:string, propertyId: string, dateRange: [string, string]) => {
+
+        console.log(accessTokenGoogle);
+        console.log(propertyId);
+        console.log(dateRange[0]);
+        console.log(dateRange[1]);
         setAnalyticsloading(true); // Show loader during fetching
         try {
-            const response = await axios.post('http://192.168.211.33:8000/api/google-analytics-data', {
-                project_id: projectId,
-                url: projectUrl,
-                start_date: dateRange[0],
-                end_date: dateRange[1],
+            const response = await axios.post('http://192.168.211.33:8000/api/analytics/', {
+                "access_token": accessTokenGoogle,
+                "property_id": propertyId,
+                "start_date": dateRange[0],
+                "end_date": dateRange[1],
             });
             toast.success('Fetched Google Analytics Data');
             setAnalyticsData(response.data);
@@ -58,7 +67,7 @@ export const GoogleAnalyticsDataProvider: React.FC<{ children: ReactNode }> = ({
     };
 
     return (
-        <GoogleAnalyticsDataContext.Provider value={{ analyticsData, fetchAnalyticsData, Analyticsloading, dateAnalyticsData, countryAnalyticsData, pageAnalyticsData }}>
+        <GoogleAnalyticsDataContext.Provider value={{ analyticsData, fetchAnalyticsData, Analyticsloading, dateAnalyticsData, countryAnalyticsData, pageAnalyticsData,setpredefinedDays, predefinedDays  }}>
             {children}
         </GoogleAnalyticsDataContext.Provider>
     );

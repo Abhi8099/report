@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useSession, signIn, signOut } from "next-auth/react";
 import ClickOutside from "@/components/ClickOutside";
 import { useProfile } from "@/helpers/ProfileContext";
 import Cookies from 'js-cookie';
@@ -9,6 +10,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
 const DropdownUser = () => {
+  
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const {fetchProfile, profile} = useProfile();
 const router = useRouter();
@@ -16,38 +18,52 @@ const router = useRouter();
     fetchProfile()
   },[])
 
+  const { data: session, status } = useSession();
   const handleLogout = async () => {
-    const token = Cookies.get("login_access_token_report");
-    const refresh_token = Cookies.get("login_refresh_token_report");
     try {
-      await axios.post(`${BASE_URL}logout/`, {"refresh_token":refresh_token}, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          "Content-Type": "application/json",
-      },
-      });
-      localStorage.clear();
-      sessionStorage.clear();
-      Cookies.remove('login_access_token_report');
-      localStorage.removeItem("login_access_token_report");
-      localStorage.removeItem("login_refresh_token_report");
-      localStorage.removeItem("login_user");
-      window.history.pushState(null, "", window.location.href);
-      window.addEventListener("popstate", () => {
-          window.history.pushState(null, "", window.location.href);
-      });
-      toast.success("Logged out successfully");
-      router.push("/");
+      const token = Cookies.get('login_access_token_report')
+      const refreshToken = Cookies.get('login_refresh_token_report')
+
+      if (token && refreshToken) {
+        await axios.post(
+          `${BASE_URL}/logout/`,
+          { refresh_token: refreshToken },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          }
+        )
+      }
+
+      // Clear all storage
+      localStorage.clear()
+      sessionStorage.clear()
+
+      // Remove specific cookies
+      const cookiesToRemove = [
+        'login_access_token_report',
+        'login_refresh_token_report',
+        'next-auth.callback-url',
+        'next-auth.csrf-token',
+        'next-auth.session-token',
+      ]
+      cookiesToRemove.forEach(cookie => Cookies.remove(cookie))
+
+      // Sign out from NextAuth
+      await signOut({ redirect: false })
+
+      toast.success('Logged out successfully')
+      router.push('/')
     } catch (error) {
-      toast.error("An error occurred during logout");
+      console.error('Logout error:', error)
+      toast.error('An error occurred during logout')
     }
     finally{
-
-        window.location.reload();
-
+      window.location.reload();
     }
   }
-
   return (
     <ClickOutside onClick={() => setDropdownOpen(false)} className="relative">
       <Link

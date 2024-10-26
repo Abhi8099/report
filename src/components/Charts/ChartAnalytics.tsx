@@ -1,112 +1,146 @@
-"use client"
+"use client";
 import { ApexOptions } from "apexcharts";
 import React from "react";
 import ReactApexChart from "react-apexcharts";
-import { useGoogleSearchConsoleData } from "@/helpers/GoogleSearchConsoleDataContext";
 import { Skeleton } from "@mui/material";
+import { useGoogleAnalyticsData } from "@/helpers/GoogleAnalyticsDataContext";
+import dayjs from "dayjs";
+import weekOfYear from "dayjs/plugin/weekOfYear"; // To handle weekly grouping
 
-const ChartOne: React.FC = () => {
-  const { fetchGSCData, loading, data, dateData } = useGoogleSearchConsoleData();
+dayjs.extend(weekOfYear); // Extend dayjs with weekOfYear
 
+const ChartAnalytics: React.FC = () => {
+  const { analyticsData, Analyticsloading } = useGoogleAnalyticsData();
   const [selectedPeriod, setSelectedPeriod] = React.useState("Daily");
 
-  // Check if dateData is available and not empty
-  const hasData = dateData && dateData.length > 0;
+  // Extract date_sums data
+  const dateSums = analyticsData?.date_sums || {};
 
-  // Function to handle changes in the "Short by" dropdown
+  // Aggregate data based on the selected period
+  const groupByPeriod = React.useMemo(() => {
+    const groupedData: { [key: string]: any } = {};
+
+    Object.entries(dateSums).forEach(([date, metrics]) => {
+      const parsedDate = dayjs(date);
+
+      // Define the key based on the selected period
+      let periodKey = "";
+      if (selectedPeriod === "Daily") {
+        periodKey = parsedDate.format("YYYY-MM-DD");
+      } else if (selectedPeriod === "Weekly") {
+        periodKey = `Week ${parsedDate.week()} - ${parsedDate.year()}`;
+      } else if (selectedPeriod === "Monthly") {
+        periodKey = parsedDate.format("YYYY-MM");
+      }
+
+      if (!groupedData[periodKey]) {
+        groupedData[periodKey] = {
+          newUsers: 0,
+          activeUsers: 0,
+          eventCount: 0,
+          screenPageViews: 0,
+        };
+      }
+
+      const {
+        newUsers = 0,
+        activeUsers = 0,
+        eventCount = 0,
+        screenPageViews = 0,
+      } = metrics as {
+        newUsers?: number;
+        activeUsers?: number;
+        eventCount?: number;
+        screenPageViews?: number;
+      };
+
+      // Accumulate metrics for the given period key
+      groupedData[periodKey].newUsers += newUsers;
+      groupedData[periodKey].activeUsers += activeUsers;
+      groupedData[periodKey].eventCount += eventCount;
+      groupedData[periodKey].screenPageViews += screenPageViews;
+    });
+
+    return groupedData;
+  }, [dateSums, selectedPeriod]);
+
+  // Prepare data for the chart
+  const dateData = Object.entries(groupByPeriod)
+    .map(([period, metrics]) => ({
+      period,
+      ...metrics,
+    }))
+    .sort((a, b) => new Date(a.period).getTime() - new Date(b.period).getTime());
+
+  // Function to handle changes in the "Sort by" dropdown
   const handlePeriodChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedPeriod(event.target.value);
   };
 
-  // Create a function to group dateData based on the selected period
-  const getGroupedData = (data: any[], period: string) => {
-    const grouped: { [key: string]: { clicks: number; impressions: number; ctr: number; position: number; count: number } } = {};
+  // Check if dateData is available and not empty
+  const hasData = dateData && dateData.length > 0;
 
-    data.forEach((item) => {
-      const date = new Date(item.date);
-      let key;
-      if (period === "Weekly") {
-        const startOfWeek = new Date(date.setDate(date.getDate() - date.getDay()));
-        key = startOfWeek.toISOString().split('T')[0]; // Get the start of the week
-      } else if (period === "Monthly") {
-        key = date.toISOString().split('T')[0].slice(0, 7); // Year-Month
-      } else {
-        key = item.date; // Daily
-      }
-
-      if (!grouped[key]) {
-        grouped[key] = { clicks: 0, impressions: 0, ctr: 0, position: 0, count: 0 };
-      }
-      grouped[key].clicks += Number(item.clicks);
-      grouped[key].impressions += Number(item.impressions);
-      grouped[key].ctr += Number(item.ctr);
-      grouped[key].position += Number(item.position);
-      grouped[key].count += 1;
-    });
-
-    // Convert grouped data to an array and sort it by date
-    return Object.entries(grouped)
-      .map(([key, value]) => ({
-        date: key,
-        clicks: value.clicks,
-        impressions: value.impressions,
-        ctr: value.ctr / value.count, // Average CTR
-        position: value.position / value.count, // Average Position
-      }))
-      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()); // Sort by date ascending
-  };
-
-  const groupedData = React.useMemo(() => {
-    return getGroupedData(dateData, selectedPeriod);
-  }, [dateData, selectedPeriod]);
-
+  // Define chart series based on all metrics you want to display
   const series = React.useMemo(() => {
-    if (!groupedData || groupedData.length === 0) return [];
+    if (!hasData) return [];
     return [
       {
-        name: "Clicks",
-        data: groupedData.map((item) => Number(item.clicks) || 0),
+        name: "New Users",
+        data: dateData.map((item) => item.newUsers || 0),
       },
       {
-        name: "Impressions",
-        data: groupedData.map((item) => Number(item.impressions) || 0),
+        name: "Active Users",
+        data: dateData.map((item) => item.activeUsers || 0),
       },
       {
-        name: "CTR",
-        data: groupedData.map((item) => Number(item.ctr) * 100 || 0),
+        name: "Event Count",
+        data: dateData.map((item) => item.eventCount || 0),
       },
       {
-        name: "Position",
-        data: groupedData.map((item) => Number(item.position) || 0),
+        name: "Screen Page Views",
+        data: dateData.map((item) => item.screenPageViews || 0),
       },
     ];
-  }, [groupedData]);
+  }, [dateData]);
 
+  // Categories for the X-axis (periods)
   const categories = React.useMemo(() => {
-    return groupedData.map((item) => item.date);
-  }, [groupedData]);
+    return dateData.map((item) => item.period);
+  }, [dateData]);
 
+  // ApexCharts configuration
   const options: ApexOptions = React.useMemo(() => ({
     legend: {
       show: true,
       position: "top",
       horizontalAlign: "left",
     },
-    colors: ["#FF4560", "#008FFB", "#00E396", "#775DD0"],
+    colors: [
+      "#006BD7", // New Users
+      "#EF1649", // Active Users
+      "#1090D0", // Event Count
+      "#F24A25", // Screen Page Views
+    ],
     chart: {
       fontFamily: "Satoshi, sans-serif",
       height: 310,
       type: "line",
       toolbar: {
-        show: false,
+        show: true,
       },
     },
     stroke: {
       curve: "smooth",
-      width: [2, 2, 2, 2],
+      width: [2, 2, 2, 2, 2, 2],
     },
     markers: {
-      size: 0,
+      size: 4,
+      colors: ["#006BD7", "#EF1649", "#1090D0","#F24A25",],
+      strokeColors: "#fff",
+      strokeWidth: 2,
+      hover: {
+        size: 7,
+      },
     },
     grid: {
       strokeDashArray: 5,
@@ -136,6 +170,16 @@ const ChartOne: React.FC = () => {
     xaxis: {
       type: "category",
       categories: categories,
+      tickAmount: Math.min(categories.length, 10),
+      labels: {
+        rotate: -45,  // Rotate labels 45 degrees for better fit
+        formatter: function (value) {
+          const date = new Date(value);
+          const day = date.getDate();
+          const month = date.toLocaleString('default', { month: 'short' });
+          return `${day} ${month}`;
+        },
+      },
       axisBorder: {
         show: false,
       },
@@ -146,7 +190,7 @@ const ChartOne: React.FC = () => {
     yaxis: [
       {
         title: {
-          text: "Clicks",
+          text: "Users",
         },
         labels: {
           formatter: (value) => Math.round(value).toString(),
@@ -155,34 +199,17 @@ const ChartOne: React.FC = () => {
       {
         opposite: true,
         title: {
-          text: "Impressions",
+          text: "Sessions & Events",
         },
         labels: {
           formatter: (value) => Math.round(value).toString(),
-        },
-      },
-      {
-        title: {
-          text: "CTR (%)",
-        },
-        labels: {
-          formatter: (value) => value.toFixed(2),
-        },
-      },
-      {
-        opposite: true,
-        title: {
-          text: "Position",
-        },
-        labels: {
-          formatter: (value) => value.toFixed(2),
         },
       },
     ],
   }), [categories]);
 
   return (
-    <div className="col-span-12 rounded-lg bg-white px-7 pb-6 pt-7 shadow-md dark:bg-gray-800 dark:shadow-gray-700 xl:col-span-7">
+    <div className="col-span-12 rounded-lg bg-white py-7 dark:bg-gray-800 dark:shadow-gray-700 xl:col-span-7">
       <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h4 className="text-2xl font-bold text-gray-800 dark:text-white">
@@ -191,7 +218,7 @@ const ChartOne: React.FC = () => {
         </div>
         <div className="flex items-center gap-2">
           <p className="font-medium uppercase text-gray-600 dark:text-gray-400">
-            Short by:
+            Sort by:
           </p>
           <select
             value={selectedPeriod}
@@ -206,9 +233,9 @@ const ChartOne: React.FC = () => {
       </div>
       <div>
         <div className="-ml-4 -mr-5">
-          {loading ? (
+          {Analyticsloading ? (
             <Skeleton variant="rectangular" animation="wave" width="100%" height={300} className="rounded-[10px]" />
-          ) : groupedData.length > 0 ? (
+          ) : hasData ? (
             <ReactApexChart
               options={options}
               series={series}
@@ -226,4 +253,4 @@ const ChartOne: React.FC = () => {
   );
 };
 
-export default ChartOne;
+export default ChartAnalytics;

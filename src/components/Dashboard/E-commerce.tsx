@@ -10,9 +10,11 @@ import { formatDistanceToNow } from 'date-fns';
 import DefaultLayout from "../Layouts/DefaultLaout";
 import Image from "next/image";
 import { FcGoogle } from "react-icons/fc";
+import { useProjectContext } from "@/helpers/ProjectContext";
 
 
 const ECommerce: React.FC = () => {
+
   const { data: session, status } = useSession()
   const router = useRouter()
   const pathname = usePathname()
@@ -69,7 +71,7 @@ const ECommerce: React.FC = () => {
   return (
     <DefaultLayout>
         <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-bold ">Google Search Console Dashboard</h1>
+          <h1 className="text-2xl font-bold text-black ">Google Search Console Dashboard</h1>
           <button
         onClick={() => {
           console.log("Signing out...")
