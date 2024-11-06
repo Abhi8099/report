@@ -24,6 +24,7 @@
     "google-auth-library": "^9.14.2",
     "googleapis": "^144.0.0",
     "gsap": "^3.12.5",
+    "gsap-trial": "^3.12.5",
     "js-cookie": "^3.0.5",
     "jsvectormap": "^1.5.3",
     "leaflet": "^1.9.4",

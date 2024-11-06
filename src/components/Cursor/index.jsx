@@ -13,7 +13,7 @@ const Cursor = () => {
         x: 0,
         y: 0
     })
-    const speed = 0.5; // Adjust this value for more or less easing
+    const speed = 0.5; 
 
     const manualMouseMove = (e) => {
         const { clientX, clientY } = e;
