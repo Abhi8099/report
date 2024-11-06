@@ -13,6 +13,7 @@
     "@emotion/styled": "^11.13.0",
     "@heroicons/react": "^2.1.5",
     "@mui/material": "^6.1.2",
+    "@studio-freight/lenis": "^1.0.42",
     "antd": "^5.21.2",
     "apexcharts": "^3.45.2",
     "axios": "^1.7.7",
