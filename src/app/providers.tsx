@@ -42,9 +42,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       <ProjectProvider>
         <GoogleAnalyticsDataProvider>
           <GoogleSearchConsoleDataProvider>
-          <SmoothScrollWrapper>
+
             {children}
-            </SmoothScrollWrapper>
+
           </GoogleSearchConsoleDataProvider>
         </GoogleAnalyticsDataProvider>
       </ProjectProvider>

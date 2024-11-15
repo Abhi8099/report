@@ -15,6 +15,7 @@ import { Skeleton } from '@mui/material';
 import ChartAnalytics from '@/components/Charts/ChartAnalytics';
 import WorldMap from '@/components/Charts/WorldMap';
 import UserAcquisitionChart from '@/components/Charts/UserAcquisitionChart';
+import SmoothScrollWrapper from '@/hooks/useSmoothScroll ';
 
 
 const { RangePicker } = DatePicker;
@@ -36,6 +37,8 @@ interface AnalyticsDataItem {
 }
 
 export default function Analytics() {
+
+    
 
     const formatDate = (dateStr: any) => {
         const year = dateStr.substring(0, 4);
@@ -241,7 +244,9 @@ export default function Analytics() {
 
 
     return (
+
         <DefaultLayout>
+
             <div className="flex flex-col space-y-4">
                 <div className="flex justify-between items-center">
                     <h1 className="text-2xl font-bold text-black">Google Analytics Dashboard</h1>

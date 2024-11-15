@@ -11,6 +11,7 @@ import Faq from "@/components/Faq";
 import { FooterFour } from "@/components/Footer";
 import React from "react";
 import Image from "next/image";
+import SmoothScrollWrapper from "@/hooks/useSmoothScroll ";
 
 
 export const metadata: Metadata = {
@@ -25,6 +26,8 @@ export default function Home() {
 
   return (
     <div className="bgReport">
+                <SmoothScrollWrapper>
+
       <HeaderComp />
       <Banner />
       <Benifits />
@@ -34,6 +37,7 @@ export default function Home() {
       <Faq />
       <HomeForm />
       <FooterFour />
+      </SmoothScrollWrapper>
     </div>
   );
 }
