@@ -13,6 +13,5 @@ export function formated_date(date_string) {
     var year = date.getFullYear();
 
     // Format the date as "30 July, 2024"
-    return day+ " " + month + ", "+year
-    
+    return day+ " " + month + ", "+ year
 }

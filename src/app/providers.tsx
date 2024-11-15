@@ -13,6 +13,8 @@ import { ScrollTrigger } from 'gsap-trial/dist/ScrollTrigger';
 import { ScrollSmoother } from 'gsap-trial/dist/ScrollSmoother';
 import useIsomorphicLayoutEffect from '../helpers/isomorphicEffect';
 import Lenis from '@studio-freight/lenis';
+import useSmoothScroll from '@/hooks/useSmoothScroll ';
+import SmoothScrollWrapper from '@/hooks/useSmoothScroll ';
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   // const smoother:any = useRef();
@@ -33,30 +35,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   // }, [pathname]);
 
 
-  const pathname = usePathname();
 
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-      touchMultiplier: 2,
-    })
-
-    function raf(time: number) {
-      lenis.raf(time)
-      requestAnimationFrame(raf)
-    }
-
-    requestAnimationFrame(raf)
-
-    return () => {
-      lenis.destroy()
-    }
-  }, [pathname])
-  
 
   return <>  <SessionProvider>
     <Toaster />
@@ -64,7 +43,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       <ProjectProvider>
         <GoogleAnalyticsDataProvider>
           <GoogleSearchConsoleDataProvider>
-
+          
             {children}
 
           </GoogleSearchConsoleDataProvider>

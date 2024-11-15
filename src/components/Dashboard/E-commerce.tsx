@@ -11,10 +11,11 @@ import DefaultLayout from "../Layouts/DefaultLaout";
 import Image from "next/image";
 import { FcGoogle } from "react-icons/fc";
 import { useProjectContext } from "@/helpers/ProjectContext";
+import { useReinitLenis } from "@/hooks/use-reinit-lenis";
 
 
 const ECommerce: React.FC = () => {
-
+  useReinitLenis()
   const { data: session, status } = useSession()
   const router = useRouter()
   const pathname = usePathname()

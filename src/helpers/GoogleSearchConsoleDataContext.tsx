@@ -2,6 +2,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { BASE_URL } from '@/utils/api';
 
 interface GoogleSearchConsoleData {
     id: number;
@@ -47,7 +48,7 @@ export const GoogleSearchConsoleDataProvider: React.FC<{ children: ReactNode }> 
         
         setLoading(true); // Show loader during fetching
         try {
-            const response = await axios.post('http://192.168.211.33:8000/api/gsc-data/', {
+            const response = await axios.post(`${BASE_URL}api/gsc-data/`, {
                 // id: projectId,
                 "site_url": projectUrl,
                 "access_token": accessTokenGoogle ,
