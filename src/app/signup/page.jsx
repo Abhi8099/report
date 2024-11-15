@@ -15,6 +15,7 @@ import { BASE_URL } from '@/utils/api';
 import { motion } from 'framer-motion'; 
 import { FcGoogle } from "react-icons/fc";
 import { signIn } from 'next-auth/react';
+import SmoothScrollWrapper from '@/hooks/useSmoothScroll ';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -91,6 +92,7 @@ console.log("res",response);
 
   return (
 <>
+<SmoothScrollWrapper>
   <HeaderComp />
   <motion.div
   initial={{opacity:0}}
@@ -158,6 +160,8 @@ console.log("res",response);
     </div>
   </motion.div>
   <FooterFour />
+</SmoothScrollWrapper>
+
 </>
 
   );

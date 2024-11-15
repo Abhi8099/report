@@ -15,6 +15,7 @@ import axios from "axios";
 import { BASE_URL } from '@/utils/api';
 import { useRouter } from 'next/navigation';
 import { motion } from "framer-motion"
+import SmoothScrollWrapper from '@/hooks/useSmoothScroll ';
 
 
 
@@ -92,6 +93,7 @@ const Signin = () => {
 
     return (
 <>
+<SmoothScrollWrapper>
     <HeaderComp />
     <motion.div
       initial={{opacity:0}}
@@ -161,6 +163,8 @@ const Signin = () => {
         </div>
     </motion.div>
     <FooterFour />
+</SmoothScrollWrapper>
+
 </>
 
     );
