@@ -565,7 +565,7 @@ export default function ProjectHeader() {
       setProperties(data.properties || []);
     } catch (error) {
       console.error('Error fetching GA4 properties:', error);
-      toast.error('Error fetching GA4 properties: ' + error.message);
+      // toast.error('Error fetching GA4 properties: ' + error.message);
     } finally {
       setIsLoading(false);
     }

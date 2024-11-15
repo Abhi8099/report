@@ -61,7 +61,11 @@ export const GoogleAnalyticsDataProvider: React.FC<{ children: ReactNode }> = ({
             console.log('Google Analytics Data:', response);
         } catch (error: any) {
             console.error('Error fetching Google Analytics data:', error);
-            toast.error('Error fetching analytics data');
+            if(error.response.status === 400){
+                toast.error('Please connect to Google');
+                }else{
+                    toast.error('Error fetching Google Analytics data');
+                }
         } finally {
             setAnalyticsloading(false);
         }

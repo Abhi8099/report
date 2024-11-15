@@ -48,7 +48,7 @@ export const GoogleSearchConsoleDataProvider: React.FC<{ children: ReactNode }> 
         
         setLoading(true); // Show loader during fetching
         try {
-            const response = await axios.post(`${BASE_URL}api/gsc-data/`, {
+            const response = await axios.post(`${BASE_URL}api/gsc-data/`, { 
                 // id: projectId,
                 "site_url": projectUrl,
                 "access_token": accessTokenGoogle ,
@@ -64,7 +64,11 @@ export const GoogleSearchConsoleDataProvider: React.FC<{ children: ReactNode }> 
             console.log('GSC Data:', response);
         } catch (error: any) {
             console.error('Error fetching Google Search Console data:', error);
-            toast.error('Error fetching data');
+            if(error.response.status === 400){
+            toast.error('Please connect to Google');
+            }else{
+                toast.error('Error fetching Google Search Console data');
+            }
         } finally {
             setLoading(false);
         }
