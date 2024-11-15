@@ -13,7 +13,6 @@ import { ScrollTrigger } from 'gsap-trial/dist/ScrollTrigger';
 import { ScrollSmoother } from 'gsap-trial/dist/ScrollSmoother';
 import useIsomorphicLayoutEffect from '../helpers/isomorphicEffect';
 import Lenis from '@studio-freight/lenis';
-import useSmoothScroll from '@/hooks/useSmoothScroll ';
 import SmoothScrollWrapper from '@/hooks/useSmoothScroll ';
 
 export default function Providers({ children }: { children: React.ReactNode }) {
@@ -43,9 +42,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       <ProjectProvider>
         <GoogleAnalyticsDataProvider>
           <GoogleSearchConsoleDataProvider>
-          
+          <SmoothScrollWrapper>
             {children}
-
+            </SmoothScrollWrapper>
           </GoogleSearchConsoleDataProvider>
         </GoogleAnalyticsDataProvider>
       </ProjectProvider>

@@ -26,7 +26,7 @@ const router = useRouter();
 
       if (token && refreshToken) {
         await axios.post(
-          `${BASE_URL}/logout/`,
+          `${BASE_URL}logout/`,
           { refresh_token: refreshToken },
           {
             headers: {

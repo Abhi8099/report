@@ -68,7 +68,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
       if (token && refreshToken) {
         await axios.post(
-          `${BASE_URL}/logout/`,
+          `${BASE_URL}logout/`,
           { refresh_token: refreshToken },
           {
             headers: {
@@ -102,9 +102,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       console.error('Logout error:', error)
       toast.error('An error occurred during logout')
     }
-    finally{
-      window.location.reload();
-    }
+
   }
 
   const [pageName, setPageName] = useLocalStorage("selectedMenu", "dashboard");
