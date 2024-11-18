@@ -46,12 +46,12 @@ export function FooterFour() {
                 <Link href={"/"} className='text-sm sm:text-[17px] font-medium text-white'>Plans & pricing</Link>
                 <Link href={"/"} className='text-sm sm:text-[17px] font-medium text-white'>Resources</Link>
             </motion.div>
-            <motion.div className='flex gap-3 sm:gap-4 mt-4' variants={variants}>
+            {/* <motion.div className='flex gap-3 sm:gap-4 mt-4' variants={variants}>
                 <Link href={"/"} className='font-medium text-white'><FaFacebook className='text-xl sm:text-2xl' /></Link>
                 <Link href={"/"} className='font-medium text-white'><FaInstagram className='text-xl sm:text-2xl' /></Link>
                 <Link href={"/"} className='font-medium text-white'><BsPinterest className='text-xl sm:text-2xl' /></Link>
                 <Link href={"/"} className='font-medium text-white'><FaLinkedinIn className='text-xl sm:text-2xl' /></Link>
-            </motion.div>
+            </motion.div> */}
             <motion.h3
                 variants={variants}
                 className='text-center text-xs sm:text-sm text-white mt-4'

@@ -102,6 +102,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       console.error('Logout error:', error)
       toast.error('An error occurred during logout')
     }
+    finally{
+      window.location.reload();
+    }
 
   }
 

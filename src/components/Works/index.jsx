@@ -15,7 +15,7 @@ const Works = () => {
       initial={{ opacity: 0, y: 50 }} 
       animate={inView ? { opacity: 1, y: 0 } : {}} 
       transition={{ duration: 0.7 }}
-      className='flex md:h-[60vh]  flex-col gap-10 sm:px-6 md:px-8 lg:px-12 xl:px-50 mt-10 mb-20 '
+      className='flex md:h-[60vh] h-max flex-col gap-10 sm:px-6 md:px-8 lg:px-12 xl:px-50 2xl:mt-10 xl:mt-45 mb-20 '
     >
       {/* Header section */}
       <div className='flex flex-col gap-2 text-center lg:text-left'>

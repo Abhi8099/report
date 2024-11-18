@@ -42,49 +42,50 @@ const people = [
 const Banner = () => {
 
     return (
-        <div className='flex flex-col xl:flex-row w-full h-screen xl:pl-45 xl:pt-41'>
-            <div className='flex flex-col items-start justify-center gap-7 px-5 pt-10 xl:pr-10 xl:pt-0 xl:-mt-20'>
-                <h1 className='text-[30px] sm:text-[36px] lg:text-[45px] xl:text-[55px] text-black font-extrabold leading-tight'>
-                    Multiple Reports, <br />
-                    One Solution <br />
-                    Simplify your workflow <br />
-                    with Analytixio
-                </h1>
-                <h3 className='text-[#7C7C7C] font-medium text-sm sm:text-base xl:text-lg'>
-                    Your all-in-one analytics dashboard for data-driven decisions.
-                </h3>
-                <div className='flex flex-col gap-2'>
-                    <h3 className='text-sm sm:text-base text-black font-semibold'>Integrated Platforms</h3>
-                    <Image
-                    rel='pre'
-                        src={"/images/new/Group 1000004888.svg"}
-                        alt="new"
-                        loading='eager'
-                        decoding='async'
-                        priority='true'
-                        width={100}
-                        height={100}
-                    />
-                </div>
-                <div className="flex flex-col sm:flex-row gap-2">
-                    <button className="flex items-center justify-center px-5 py-2 sm:px-10 sm:py-3 bg-primary rounded-full text-white text-sm sm:text-base hover:text-primary hover:bg-white hover:border-primary border border-white transition">
-                        Get Started Free
-                    </button>
-                    <div className="flex flex-row items-center">
-                        <AnimatedTooltip items={people} />
-                    </div>
-                </div>
-            </div>
-            <div className='flex items-center justify-center xl:justify-end flex-1'>
-                <Image
-                    src={"/images/new/Group 1000004972.svg"}
-                    alt="new"
-                    width={950}
-                    height={950}
-                    className="w-full xl:w-auto"
-                />
+<div className="flex flex-col lg:flex-row w-full h-auto xl:h-screen xl:pl-45 xl:pt-41 lg:pt-20 gap-4 lg:gap-0 ">
+    <div className="flex flex-col items-start justify-center gap-5 px-4 pt-6 xl:pr-10 xl:pt-0 xl:-mt-20">
+        <h1 className="text-[clamp(24px,5vw,55px)] text-black font-extrabold leading-tight">
+            Multiple Reports, <br />
+            One Solution <br />
+            Simplify your workflow <br />
+            with Analytixio
+        </h1>
+        <h3 className="text-[#7C7C7C] font-medium text-sm sm:text-base xl:text-lg">
+            Your all-in-one analytics dashboard for data-driven decisions.
+        </h3>
+        <div className="flex flex-col gap-2">
+            <h3 className="text-sm sm:text-base text-black font-semibold">Integrated Platforms</h3>
+            <Image
+                src={"/images/new/Group 1000004888.svg"}
+                alt="new"
+                loading="eager"
+                decoding="async"
+                priority={true}
+                width={80}
+                height={80}
+                className="w-[clamp(50px,10vw,100px)] h-auto"
+            />
+        </div>
+        <div className="flex flex-col sm:flex-row gap-2">
+            <button className="flex items-center justify-center px-4 py-2 sm:px-8 sm:py-3 bg-primary rounded-full text-white text-sm sm:text-base hover:text-primary hover:bg-white hover:border-primary border border-white transition">
+                Get Started Free
+            </button>
+            <div className="flex flex-row items-center">
+                <AnimatedTooltip items={people} />
             </div>
         </div>
+    </div>
+    <div className="flex items-center justify-center xl:justify-end flex-1 px-4 sm:px-8">
+        <Image
+            src={"/images/new/Group 1000004972.svg"}
+            alt="new"
+            width={950}
+            height={950}
+            className="w-full  xl:w-auto"
+        />
+    </div>
+</div>
+
     )
 }
 

@@ -155,9 +155,9 @@ const Signin = () => {
                     <h3 className='text-center text-[#948F8F] font-medium w-full flex items-center justify-center gap-2'>
                         Don&apos;t have an account? <Link href={"/signup"} className='text-primary font-semibold hover:scale-105 hover:underline smooth3'>Sign Up</Link>
                     </h3>
-                    <h3 className='text-center w-full flex items-center justify-center gap-2 font-semibold'>
+                    {/* <h3 className='text-center w-full flex items-center justify-center gap-2 font-semibold'>
                         Follow - <FaFacebook className='text-primary text-lg' /><FaInstagram className='text-primary text-lg' /><FaLinkedinIn className='text-primary text-lg' /><BsPinterest className='text-primary text-lg' />
-                    </h3>
+                    </h3> */}
                 </div>
             </div>
         </div>

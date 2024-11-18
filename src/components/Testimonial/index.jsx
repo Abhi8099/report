@@ -78,9 +78,9 @@ const Testimonial = () => {
     animate={inView ? { opacity: 1, y: 0 } : {}} 
     transition={{ duration: 0.7 }}
     
-    className='flex h-[80vh]  gap-15 sm:px-6 md:px-8 lg:px-12 xl:px-50 md:flex-row flex-col'>
-      <div className='flex flex-1 items-center justify-center bgTestimonial'>
-        <div className="relative md:w-[450px] h-[200px] w-full ">
+    className='flex h-[30vh] md:h-[80vh]   gap-15 sm:px-6 md:px-8 lg:px-12 xl:px-50 md:flex-row flex-col'>
+      <div className='flex md:flex-[3] 2xl:flex-1 items-center justify-center bgTestimonial'>
+        <div className="relative sm:w-[450px] h-[200px] w-full p-10 md:p-0">
           {cards.map((card, index) => {
             const cardIndex = (index - activeIndex + cards.length) % cards.length;
             return (
@@ -113,7 +113,7 @@ const Testimonial = () => {
         </div>
       </div>
 
-      <div className='flex-1 flex flex-col gap-10 items-center justify-center px-6 md:px-0'>
+      <div className='flex-1 xl:flex flex-col gap-10 items-center justify-center px-6 md:px-0 hidden '>
         <h3 className='text-[28px] md:text-[45px] font-extrabold text-black leading-tight text-start'>
           What people say <br /> about Us.
         </h3>
