@@ -99,7 +99,7 @@ const Signup = () => {
           animate={{ opacity: 1 }}
           transition={{ ease: "linear" }}
           className='h-screen flex items-center justify-center px-4 md:px-60 text-black'>
-          <div className="h-[746px] w-full  flex flex-col md:flex-row shadow-lg bg-gradient-to-b from-primary to-[#fff] rounded-[37px]">
+          <div className="h-auto 2xl:h-[746px] xl:h-[640px] lg:h-[540px] md:h-[440px] sm:h-[340px] w-full  flex flex-col md:flex-row shadow-lg bg-gradient-to-b from-primary to-[#fff] rounded-[37px]">
             <div className="hidden md:flex flex-1 flex-col gap-6 items-center justify-center bg-primary rounded-l-[37px] rounded-br-[37px] text-white">
               <h3 className='text-[43px] font-semibold text-white'>Analytixio</h3>
               <h3 className='text-base text-center font-medium text-white/65'>
