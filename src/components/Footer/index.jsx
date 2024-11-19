@@ -37,8 +37,8 @@ export function FooterFour() {
                 variants={variants}
                 className='text-center text-sm sm:text-base font-medium text-white/65 max-w-[90%] sm:max-w-[80%] lg:max-w-[70%]'
             >
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae minus qui consequuntur accusantium,
-                <br className="hidden sm:block" /> totam aperiam corrupti nesciunt doloremque odio fugiat, ea eaque cumque cum.
+               Your all-in-one analytics dashboard for data-driven decisions.
+
             </motion.h3>
             <motion.div className='flex flex-wrap gap-4 sm:gap-6 justify-center' variants={variants}>
                 <Link href={"/"} className='text-sm sm:text-[17px] font-medium text-white'>Home</Link>

@@ -3,6 +3,7 @@ import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { useInView } from 'react-intersection-observer';
+import { useRouter } from 'next/navigation';
 
 const imageMapping = {
   dashboard: "/images/new/console.svg",
@@ -12,6 +13,7 @@ const imageMapping = {
 };
 
 const Views = () => {
+  const router = useRouter()
   const [active, setActive] = useState("dashboard");
   const [currentImage, setCurrentImage] = useState(imageMapping[active]);
   const { ref, inView } = useInView({
@@ -90,7 +92,9 @@ const Views = () => {
       </div>
       {/* Call-to-action Button */}
       <div className='flex items-center justify-center'>
-        <button className="w-[200px] px-8 sm:px-10 py-2 sm:py-3 bg-primary rounded-full text-white text-sm sm:text-base hover:text-primary hover:bg-white hover:border-primary border border-white smooth3">
+        <button 
+        onClick={() => router.push('signin')}
+        className="w-[200px] px-8 sm:px-10 py-2 sm:py-3 bg-primary rounded-full text-white text-sm sm:text-base hover:text-primary hover:bg-white hover:border-primary border border-white smooth3">
           Get Started Free
         </button>
       </div>

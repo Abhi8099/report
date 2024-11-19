@@ -3,8 +3,10 @@ import Image from 'next/image'
 import React from 'react'
 import {motion} from "framer-motion"
 import { useInView } from 'react-intersection-observer';
+import { useRouter } from 'next/navigation';
 
 const Benifits = () => {
+    const router = useRouter()
     const { ref, inView } = useInView({
         triggerOnce: true,
         threshold: 0.1,
@@ -61,7 +63,9 @@ const Benifits = () => {
                 </div>
             </div>
         </div>
-        <button className="flex items-center justify-center px-4 py-3 bg-primary rounded-full w-full md:w-1/3 xl:w-1/4 text-white text-base hover:text-primary hover:bg-white hover:border-primary border border-white smooth3">
+        <button 
+        onClick={() => router.push('signin')}
+        className="flex items-center justify-center px-4 py-3 bg-primary rounded-full w-full md:w-1/3 xl:w-1/4 text-white text-base hover:text-primary hover:bg-white hover:border-primary border border-white smooth3">
             Connect With Us
         </button>
     </div>

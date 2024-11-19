@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import React from 'react'
 import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
+import { useRouter } from 'next/navigation';
 
 const people = [
     {
@@ -41,7 +42,7 @@ const people = [
 ];
 
 const Banner = () => {
-
+const router = useRouter()
     return (
 <div className="flex flex-col lg:flex-row w-full h-auto xl:h-screen xl:pl-45 xl:pt-41 lg:pt-20 gap-4 lg:gap-0 ">
     <div className="flex flex-col items-start justify-center gap-5 px-4 pt-6 xl:pr-10 xl:pt-0 xl:-mt-20">
@@ -68,7 +69,9 @@ const Banner = () => {
             />
         </div>
         <div className="flex flex-col sm:flex-row gap-2">
-            <button className="flex items-center justify-center px-4 py-2 sm:px-8 sm:py-3 bg-primary rounded-full text-white text-sm sm:text-base hover:text-primary hover:bg-white hover:border-primary border border-white transition">
+            <button
+            onClick={() => router.push('signin')}
+            className="flex items-center justify-center px-4 py-2 sm:px-8 sm:py-3 bg-primary rounded-full text-white text-sm sm:text-base hover:text-primary hover:bg-white hover:border-primary border border-white transition">
                 Get Started Free
             </button>
             <div className="flex flex-row items-center">
