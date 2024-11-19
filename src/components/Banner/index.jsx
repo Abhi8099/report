@@ -80,6 +80,8 @@ const Banner = () => {
         <Image
             src={"/images/new/Group 1000004972.svg"}
             alt="new"
+                            loading="eager"
+                decoding="async"
             width={950}
             height={950}
             className="w-full  xl:w-auto"
