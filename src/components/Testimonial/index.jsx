@@ -130,6 +130,7 @@ const Testimonial = () => {
               key={index}
               className={`h-2 w-2 md:h-3 md:w-3 rounded-full ${activeIndex === index ? 'bg-primary' : 'bg-[#D1D3D4]'}`}
               onClick={() => handleButtonClick(index)}
+              aria-label={`Go to slide ${index + 1}`}
             ></button>
           ))}
 
