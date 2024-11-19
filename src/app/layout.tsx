@@ -23,6 +23,7 @@ export default function RootLayout({
       <body suppressHydrationWarning={true}>
 <Providers>
 { children}
+<SpeedInsights />
 </Providers>
       </body>
     </html>
