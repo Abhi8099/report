@@ -6,7 +6,7 @@ import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 
 const markerIcon = L.icon({
-  iconUrl: '/images/icon/vector.png', 
+  iconUrl: '/images/icon/Vector.png', 
   iconSize: [17, 25], 
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
