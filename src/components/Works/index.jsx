@@ -32,7 +32,7 @@ const Works = () => {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 1, delay: 0.3 }}
-          className='h-[337px] w-[400px] md:w-[441px] bg-primary rounded-[16px] shadow-lg relative overflow-hidden group smooth3'
+          className='h-[337px] w-[350px] md:w-[441px] bg-primary rounded-[16px] shadow-lg relative overflow-hidden group smooth3'
         >
           <div className='size-[210px] rounded-full bg-[#007bf6] group-hover:shadow-lg smooth3 flex items-center justify-center absolute -left-16 -top-20'>
             <h3 className='text-white/30 pt-15  pl-13 text-[40px] font-medium group-hover:text-white smooth3'>01</h3>
@@ -50,7 +50,7 @@ const Works = () => {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 1, delay: 0.5 }}
-          className='h-[337px] w-[400px] md:w-[441px]  bg-primary rounded-[16px] shadow-lg relative overflow-hidden group smooth3'
+          className='h-[337px] w-[350px] md:w-[441px]  bg-primary rounded-[16px] shadow-lg relative overflow-hidden group smooth3'
         >
           <div className='size-[210px] rounded-full bg-[#007bf6] group-hover:shadow-lg smooth3 flex items-center justify-center absolute -left-16 -top-20'>
             <h3 className='text-white/30 pt-15  pl-13 text-[40px] font-medium group-hover:text-white smooth3'>02</h3>
@@ -68,7 +68,7 @@ const Works = () => {
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1, x: 0 } : {}}
         transition={{ duration: 1, delay:0.7 }}
-         className='h-[337px] w-[400px] md:w-[441px] bg-primary rounded-[16px] shadow-lg relative overflow-hidden group smooth3'>
+         className='h-[337px] w-[350px] md:w-[441px] bg-primary rounded-[16px] shadow-lg relative overflow-hidden group smooth3'>
             <div className='size-[210px] rounded-full bg-[#007bf6] group-hover:shadow-lg smooth3  flex items-center justify-center absolute -left-16 -top-20 '>
                 <h3 className='text-white/30 text-[40px] pt-15  pl-13 font-medium  group-hover:text-white smooth3 '>03</h3>
             </div>

@@ -52,7 +52,7 @@ export default function HomeForm() {
         >
             {/* Left section */}
             <div className="w-full lg:w-1/3 mb-8 lg:mb-0">
-                <h3 className="text-[24px] sm:text-[30px] lg:text-[45px] font-extrabold text-black leading-tight text-start">
+                <h3 className="text-[24px] sm:text-[30px] lg:text-[45px] font-extrabold text-black leading-tight text-center md:text-start">
                     Have questions or need support?
                 </h3>
             </div>
@@ -92,7 +92,7 @@ export default function HomeForm() {
             </form>
 
             {/* Right section */}
-            <div className="w-full lg:w-1/3 text-left lg:text-right flex flex-col items-start lg:items-end gap-2">
+            <div className="w-full lg:w-1/3 text-center md:text-left lg:text-right flex flex-col items-center md:items-start lg:items-end gap-2">
                 <p className="flex gap-3 items-center"><span className="font-bold">Email:</span> support@analytixio.com</p>
                 <p className="flex gap-3 items-center"><span className="font-bold">Phone Number:</span> +1-800-123-4567</p>
                 <p className="flex gap-3 items-center"><span className="font-bold">Address:</span> 123 Analytics Drive, Data</p>
