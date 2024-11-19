@@ -124,7 +124,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       // console.log(activeMenu.label);
       setPageName(activeMenu.label.toLowerCase());
     } else {
-      console.log("No active menu found."); 
+      // console.log("No active menu found."); 
     }
   }, [pathname, setPageName]);
   

@@ -19,7 +19,7 @@ const Dashboard = () => {
 
 
   const handleSignIn = () => {
-    console.log("Initiating Google sign-in...")
+    // console.log("Initiating Google sign-in...")
     const callbackUrl = `${window.location.origin}${pathname}`
     signIn('google', { callbackUrl })
   }
@@ -33,7 +33,7 @@ const Dashboard = () => {
           {session?
                     <button
                     onClick={() => {
-                      console.log("Signing out...")
+                      // console.log("Signing out...")
                       signOut({ callbackUrl: pathname })
                     }}
                     className="bg-primary hover:bg-red-500 text-white font-bold py-1.5 px-4 rounded-md flex gap-2 items-center transition duration-300"

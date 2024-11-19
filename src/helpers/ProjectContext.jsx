@@ -11,10 +11,10 @@ export const ProjectProvider = ({ children }) => {
 
 
     const [projects, setProjects] = useState([]);
-    console.log(projects.length);
+    // console.log(projects.length);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [selectedProject, setSelectedProject] = useState(null);
-console.log(selectedProject);
+// console.log(selectedProject);
 
     const [loading, setLoading] = useState(false);
     const [createdId, setCreatedId] = useState("")
@@ -35,10 +35,10 @@ console.log(selectedProject);
                 },
             });
             setProjects(response.data);
-            console.log("Fetched Projects: ", response.data);
+            // console.log("Fetched Projects: ", response.data);
             const fetchedProjects = response.data;
             setLastProject(fetchedProjects[fetchedProjects.length - 1])
-            console.log(lastProject);
+            // console.log(lastProject);
             setIsModalVisible(false);
 
         } catch (error) {
@@ -51,7 +51,7 @@ console.log(selectedProject);
     };
 
     const createProject = async (postData) => {
-        console.log(lastProject);
+        // console.log(lastProject);
         
         const token = Cookies.get("login_access_token_report");
         try {
@@ -62,7 +62,7 @@ console.log(selectedProject);
                 },
             });
     
-            console.log("Project created successfully: ", response.data);
+            // console.log("Project created successfully: ", response.data);
     
             const newProject = response.data; // Get the new project data
             setCreatedId(newProject.project_id); // Update the state with the new project ID
@@ -95,8 +95,8 @@ console.log(selectedProject);
 
     };
     const updateProject = async (projectId, postData2) => {
-        console.log(projectId);
-        console.log(postData2);
+        // console.log(projectId);
+        // console.log(postData2);
         
         const token = Cookies.get("login_access_token_report");
         try {
@@ -106,7 +106,7 @@ console.log(selectedProject);
                     'Content-Type': 'application/json',
                 },
             });
-            console.log("Project updated successfully: ", response.data);
+            // console.log("Project updated successfully: ", response.data);
     toast.success("Project Updated")
             fetchProjects(); // Refresh projects after update
         } catch (error) {

@@ -4,11 +4,11 @@ import { authOptions } from '../auth/[...nextauth]/auth';
 
 export async function GET(req: any) {
   // Step 1: Log the request details
-  console.log("Received request:", req.url);
+  // console.log("Received request:", req.url);
 
   // Step 2: Retrieve and log the session details
   const session = await getServerSession(authOptions);
-  console.log("Session data:", JSON.stringify(session, null, 2));
+  // console.log("Session data:", JSON.stringify(session, null, 2));
 
   // Step 3: Handle missing session or access token
   if (!session || !session.accessToken) {
@@ -19,12 +19,12 @@ export async function GET(req: any) {
   // Step 4: Extract search parameters from the request URL
   const { searchParams } = new URL(req.url);
   const action = searchParams.get('action');
-  console.log("Action parameter:", action);
+  // console.log("Action parameter:", action);
 
   try {
     // Step 5: Check if action is 'getGA4Properties'
     if (action === 'getGA4Properties') {
-      console.log("Fetching GA4 properties list...");
+      // console.log("Fetching GA4 properties list...");
 
       // Step 6: Fetch Google Analytics accounts
       const accountsResponse = await fetch('https://analyticsadmin.googleapis.com/v1beta/accounts', {
@@ -45,7 +45,7 @@ export async function GET(req: any) {
       // Step 8: Parse and log the fetched account data
       const accountsData = await accountsResponse.json();
       const accounts = accountsData.accounts || [];
-      console.log("Accounts fetched:", JSON.stringify(accounts, null, 2));
+      // console.log("Accounts fetched:", JSON.stringify(accounts, null, 2));
 
       if (accounts.length === 0) {
         return NextResponse.json({ message: 'No Google Analytics accounts found' }, { status: 404 });
@@ -55,7 +55,7 @@ export async function GET(req: any) {
       const allProperties = [];
       for (const account of accounts) {
         const accountId = account.name;
-        console.log(`Fetching properties for account: ${accountId}`);
+        // console.log(`Fetching properties for account: ${accountId}`);
 
         // Fetch properties for the current account
         const propertiesResponse = await fetch(`https://analyticsadmin.googleapis.com/v1beta/properties?filter=parent:${accountId}`, {
@@ -77,7 +77,7 @@ export async function GET(req: any) {
         const propertiesData = await propertiesResponse.json();
         const properties = propertiesData.properties || [];
         allProperties.push(...properties);
-        console.log(`Properties for account ${accountId}:`, JSON.stringify(properties, null, 2));
+        // console.log(`Properties for account ${accountId}:`, JSON.stringify(properties, null, 2));
       }
 
       // Step 11: Handle the case where no properties were found
@@ -86,7 +86,7 @@ export async function GET(req: any) {
       }
 
       // Step 12: Log and return the fetched properties
-      console.log("GA4 properties found:", JSON.stringify(allProperties, null, 2));
+      // console.log("GA4 properties found:", JSON.stringify(allProperties, null, 2));
       const projectIds = allProperties.map(prop => prop.name);
 
       return NextResponse.json({ projectIds, properties: allProperties });

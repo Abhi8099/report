@@ -66,7 +66,7 @@ const Signup = () => {
     event.preventDefault();
 
     try {
-      console.log("data", formData);
+      // console.log("data", formData);
       const response = await axios.post(
         `${BASE_URL}register/`,
         formData,
@@ -76,7 +76,7 @@ const Signup = () => {
           },
         }
       );
-      console.log("res", response);
+      // console.log("res", response);
       toast.success("Signup successful");
       router.push("/signin");
     } catch (error) {

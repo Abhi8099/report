@@ -516,12 +516,12 @@ input:-webkit-autofill {
     box-shadow: 0 0 0 1000px white inset !important; 
     background-color: white !important; 
 }
-.bgReport{
-    background-image: url('/images/new/bgreport.svg');
-    background-size: cover;
-    background-repeat: no-repeat;  
-    z-index: -20;
+.bgReport {
+    background-image: url('/images/new/bgreport.svg') !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
 }
+
 .bgTestimonial{
     background-image: url('/images/new/Group 1000004926.svg');
     background-position: center;

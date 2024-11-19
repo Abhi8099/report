@@ -41,10 +41,10 @@ export const GoogleSearchConsoleDataProvider: React.FC<{ children: ReactNode }> 
     const [predefinedDays, setpredefinedDays] = useState<number | null>(null); // Updated state type
 
     const fetchGSCData = async ( accessTokenGoogle:string , projectUrl: string, dateRange: [string, string]) => {
-        console.log(accessTokenGoogle);
-        console.log(projectUrl);
-        console.log(dateRange[0]);
-        console.log(dateRange[1]);
+        // console.log(accessTokenGoogle);
+        // console.log(projectUrl);
+        // console.log(dateRange[0]);
+        // console.log(dateRange[1]);
         
         setLoading(true); // Show loader during fetching
         try {
@@ -61,7 +61,7 @@ export const GoogleSearchConsoleDataProvider: React.FC<{ children: ReactNode }> 
             setcountryData(response.data.country_data);
             setPageData(response.data.page_data);
             setQueryData(response.data.query_data);
-            console.log('GSC Data:', response);
+            // console.log('GSC Data:', response);
         } catch (error: any) {
             console.error('Error fetching Google Search Console data:', error);
             if(error.response.status === 400){

@@ -41,10 +41,10 @@ export const GoogleAnalyticsDataProvider: React.FC<{ children: ReactNode }> = ({
 
     const fetchAnalyticsData = async (accessTokenGoogle:string, propertyId: string, dateRange: [string, string]) => {
 
-        console.log(accessTokenGoogle);
-        console.log(propertyId);
-        console.log(dateRange[0]);
-        console.log(dateRange[1]);
+        // console.log(accessTokenGoogle);
+        // console.log(propertyId);
+        // console.log(dateRange[0]);
+        // console.log(dateRange[1]);
         setAnalyticsloading(true); // Show loader during fetching
         try {
             const response = await axios.post(`${BASE_URL}api/analytics/`, {
@@ -58,7 +58,7 @@ export const GoogleAnalyticsDataProvider: React.FC<{ children: ReactNode }> = ({
             setDateAnalyticsData(response.data.date_data);
             setCountryAnalyticsData(response.data.country_data);
             setPageAnalyticsData(response.data.page_data);
-            console.log('Google Analytics Data:', response);
+            // console.log('Google Analytics Data:', response);
         } catch (error: any) {
             console.error('Error fetching Google Analytics data:', error);
             if(error.response.status === 400){

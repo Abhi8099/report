@@ -506,9 +506,9 @@ export default function ProjectHeader() {
   };
 
   const handleData = async ({ projectName, projectId, projectUrl }) => {
-    console.log(projectName);
-    console.log(projectId);
-    console.log(projectUrl);
+    // console.log(projectName);
+    // console.log(projectId);
+    // console.log(projectUrl);
 
     if (!projectId && pathname === '/analytics') {
       setProjectName(projectName);
@@ -560,7 +560,7 @@ export default function ProjectHeader() {
         throw new Error(`HTTP error! status: ${res.status}`);
       }
       const data = await res.json();
-      console.log(data);
+      // console.log(data);
 
       setProperties(data.properties || []);
     } catch (error) {

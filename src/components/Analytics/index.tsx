@@ -78,13 +78,13 @@ export default function Analytics() {
     const today = dayjs();
 
     useEffect(() => {
-        console.log("Session status:", status)
-        console.log("Session data:", session)
+        // console.log("Session status:", status)
+        // console.log("Session data:", session)
 
         if (session) {
             localStorage.setItem('accessTokenGoogle', session?.accessToken);
             setAccessTokenGoogle(session?.accessToken)
-            console.log("Retrieved access token:", session.accessToken);
+            // console.log("Retrieved access token:", session.accessToken);
         }
     }, [session, status])
 
@@ -116,10 +116,10 @@ export default function Analytics() {
 
 
     const { selectedProject } = useProjectContext();
-    console.log(selectedProject);
+    // console.log(selectedProject);
 
     const { analyticsData, setpredefinedDays, predefinedDays, fetchAnalyticsData, Analyticsloading } = useGoogleAnalyticsData();
-    console.log(analyticsData);
+    // console.log(analyticsData);
 
     const groupedData = groupByDate(analyticsData?.user_acquisition_data || []);
 
@@ -150,7 +150,7 @@ export default function Analytics() {
     }, []);
 
     const fetchGA4Properties = async () => {
-        console.log("Fetching GA4 properties...");
+        // console.log("Fetching GA4 properties...");
         setError(null);
         setIsLoading(true);
 
@@ -177,7 +177,7 @@ export default function Analytics() {
 
     const handleConnect = async () => {
         setIsSigningIn(true)
-        console.log("Opening Google login popup...")
+        // console.log("Opening Google login popup...")
 
         try {
             const result = await signIn('google', {
@@ -190,7 +190,7 @@ export default function Analytics() {
                 console.error("Sign-in error:", result.error)
                 alert(`Sign-in failed: ${result.error}`)
             } else if (result?.url) {
-                console.log("Sign-in successful")
+                // console.log("Sign-in successful")
                 // You can redirect here if needed
                 // window.location.href = result.url
             }
@@ -252,7 +252,7 @@ export default function Analytics() {
                     <h1 className="text-2xl font-bold text-black">Google Analytics Dashboard</h1>
                     <button
                         onClick={() => {
-                            console.log("Signing out...");
+                            // console.log("Signing out...");
                             signOut({ callbackUrl: pathname });
                         }}
                         className="bg-primary hover:bg-red-500 text-white font-bold py-1.5 px-4 rounded-md flex gap-2 items-center transition duration-300"

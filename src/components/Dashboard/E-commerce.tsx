@@ -23,13 +23,13 @@ const ECommerce: React.FC = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
-    console.log("Session status:", status)
-    console.log("Session data:", session)
+    // console.log("Session status:", status)
+    // console.log("Session data:", session)
 
     if (session) {
       localStorage.setItem('accessTokenGoogle', session?.accessToken);
       setAccessTokenGoogle(session?.accessToken)
-      console.log("Retrieved access token:", session.accessToken);
+      // console.log("Retrieved access token:", session.accessToken);
     }
   }, [session, status])
 
@@ -43,7 +43,7 @@ const ECommerce: React.FC = () => {
   }, []);
 
   const handleSignIn = () => {
-    console.log("Initiating Google sign-in...")
+    // console.log("Initiating Google sign-in...")
     const callbackUrl = `${window.location.origin}${pathname}`
     signIn('google', { callbackUrl })
   }
@@ -75,7 +75,7 @@ const ECommerce: React.FC = () => {
           <h1 className="text-2xl font-bold text-black ">Google Search Console Dashboard</h1>
           <button
         onClick={() => {
-          console.log("Signing out...")
+          // console.log("Signing out...")
           signOut({ callbackUrl: pathname })
         }}
         className="bg-primary hover:bg-red-500 text-white font-bold py-1.5 px-4 rounded-md flex gap-2 items-center transition duration-300"

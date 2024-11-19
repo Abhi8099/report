@@ -14,30 +14,30 @@ export default function SearchConsoleData() {
   const [accessTokenGoogle, setaccessTokenGoogle] = useState("")
 
   useEffect(() => {
-    console.log("Session status:", status)
-    console.log("Session data:", session)
+    // console.log("Session status:", status)
+    // console.log("Session data:", session)
 
 
     if (session) {
       fetchSites()
       localStorage.setItem('accessTokenGoogle',session?.accessToken );
       setaccessTokenGoogle(session?.accessToken)
-      console.log("Retrieved access token:", session.accessToken);
+      // console.log("Retrieved access token:", session.accessToken);
     }
   }, [session, status])
 
   const fetchSites = async () => {
     setLoading(true)
     setError(null)
-    console.log("Fetching sites...")
+    // console.log("Fetching sites...")
     try {
       const res = await fetch('/api/search-console?action=getSites')
-      console.log("Sites API response status:", res.status)
+      // console.log("Sites API response status:", res.status)
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`)
       }
       const data = await res.json()
-      console.log("Sites data:", data)
+      // console.log("Sites data:", data)
       setSites(data.siteEntry || [])
     } catch (error) {
       console.error('Error fetching sites:', error)
@@ -61,7 +61,7 @@ export default function SearchConsoleData() {
 
     
     try {
-    console.log(formData);
+    // console.log(formData);
         const response = await axios.post(
             `http://192.168.211.33:8000/api/gsc-data/`,
             // "http://192.168.211.62:8000/api/gsc-data/",
@@ -75,7 +75,7 @@ export default function SearchConsoleData() {
         );
         if (response.status === 200) {
             // Success feedback
-            console.log("Form submitted successfully", response.data);
+            // console.log("Form submitted successfully", response.data);
         }
     } catch (error) {
         if (error.response) {
@@ -93,15 +93,15 @@ export default function SearchConsoleData() {
     if (!selectedSite) return
     setLoading(true)
     setError(null)
-    console.log("Fetching data for site:", selectedSite)
+    // console.log("Fetching data for site:", selectedSite)
     try {
       const res = await fetch(`/api/search-console?action=getData&siteUrl=${encodeURIComponent(selectedSite)}`)
-      console.log("Data API response status:", res.status)
+      // console.log("Data API response status:", res.status)
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`)
       }
       const data = await res.json()
-      console.log("Fetched data:", data)
+      // console.log("Fetched data:", data)
       setData(data)
     } catch (error) {
       console.error('Error fetching data:', error)
@@ -121,7 +121,7 @@ export default function SearchConsoleData() {
         <h1 className="text-2xl font-bold mb-4">Connect to Google Search Console</h1>
         <button
           onClick={() => {
-            console.log("Initiating Google sign-in...")
+            // console.log("Initiating Google sign-in...")
             signIn('google', {
               callbackUrl: `${window.location.origin}/api/auth/callback/google`,
             })
@@ -169,7 +169,7 @@ export default function SearchConsoleData() {
         </div>
         <button
           onClick={() => {
-            console.log("Signing out...")
+            // console.log("Signing out...")
             signOut()
           }}
           className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300"

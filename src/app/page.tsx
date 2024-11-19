@@ -25,8 +25,8 @@ export default function Home() {
 
 
   return (
+                    <SmoothScrollWrapper>
     <div className="bgReport">
-                <SmoothScrollWrapper>
       <HeaderComp />
       <Banner />
       <Benifits />
@@ -36,7 +36,7 @@ export default function Home() {
       <Faq />
       <HomeForm />
       <FooterFour />
-      </SmoothScrollWrapper>
     </div>
+          </SmoothScrollWrapper>
   );
 }

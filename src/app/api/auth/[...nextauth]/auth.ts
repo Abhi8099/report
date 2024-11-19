@@ -21,8 +21,8 @@ export const authOptions: NextAuthOptions = {
     // },
     callbacks: {
         async jwt({ token, account }) {
-            console.log("JWT Callback - Token:", token)
-            console.log("JWT Callback - Account:", account)
+            // console.log("JWT Callback - Token:", token)
+            // console.log("JWT Callback - Account:", account)
             if (account) {
                 token.accessToken = account.access_token
                 token.idToken = account.id_token
@@ -30,8 +30,8 @@ export const authOptions: NextAuthOptions = {
             return token
         },
         async session({ session, token }: { session: any; token: any }) {
-            console.log("Session Callback - Session:", session)
-            console.log("Session Callback - Token:", token)
+            // console.log("Session Callback - Session:", session)
+            // console.log("Session Callback - Token:", token)
             session.accessToken = token.accessToken
             session.idToken = token.idToken
             return session
@@ -55,7 +55,7 @@ export const authOptions: NextAuthOptions = {
             console.warn("NextAuth Warning:", code)
         },
         debug(code, metadata) {
-            console.log("NextAuth Debug:", code, metadata)
+            // console.log("NextAuth Debug:", code, metadata)
         }
     }
 }

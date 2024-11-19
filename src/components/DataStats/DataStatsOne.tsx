@@ -38,12 +38,12 @@ const DataStatsOne: React.FC<dataStats> = () => {
   const { data: session, status } = useSession()
   const [accessTokenGoogle, setaccessTokenGoogle] = useState("")
   useEffect(() => {
-    console.log("Session status:", status)
-    console.log("Session data:", session)
+    // console.log("Session status:", status)
+    // console.log("Session data:", session)
     if (session) {
       localStorage.setItem('accessTokenGoogle',session?.accessToken );
       setaccessTokenGoogle(session?.accessToken)
-      console.log("Retrieved access token:", session.accessToken);
+      // console.log("Retrieved access token:", session.accessToken);
     }
   }, [session, status])
   const{

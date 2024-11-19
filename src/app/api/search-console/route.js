@@ -3,9 +3,9 @@ import { getServerSession } from 'next-auth/next'
 import { authOptions } from '../auth/[...nextauth]/auth'
 
 export async function GET(req) {
-  console.log("Received request:", req.url)
+  // console.log("Received request:", req.url)
   const session = await getServerSession(authOptions)
-  console.log("Session:", JSON.stringify(session, null, 2))
+  // console.log("Session:", JSON.stringify(session, null, 2))
 
   if (!session || !session.accessToken) {
     console.error("Unauthorized: No session or access token")
@@ -14,11 +14,11 @@ export async function GET(req) {
 
   const { searchParams } = new URL(req.url)
   const action = searchParams.get('action')
-  console.log("Action:", action)
+  // console.log("Action:", action)
 
   try {
     if (action === 'getSites') {
-      console.log("Fetching sites list...")
+      // console.log("Fetching sites list...")
       const response = await fetch('https://www.googleapis.com/webmasters/v3/sites', {
         headers: {
           'Authorization': `Bearer ${session.accessToken}`,
@@ -34,7 +34,7 @@ export async function GET(req) {
       }
 
       const data = await response.json()
-      console.log("Sites response:", JSON.stringify(data, null, 2))
+      // console.log("Sites response:", JSON.stringify(data, null, 2))
       return NextResponse.json(data)
     } 
     
