@@ -4,7 +4,6 @@ import "@/css/satoshi.css";
 import "@/css/style.css";
 import React, { useEffect, useState } from "react";
 import Providers from "./providers";
-import { SpeedInsights } from "@vercel/speed-insights/next"
 
 
 export default function RootLayout({
@@ -23,7 +22,6 @@ export default function RootLayout({
       <body suppressHydrationWarning={true}>
 <Providers>
 { children}
-<SpeedInsights />
 </Providers>
       </body>
     </html>
