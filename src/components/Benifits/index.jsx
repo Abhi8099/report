@@ -14,7 +14,7 @@ const Benifits = () => {
 
     return (
 <motion.div
-    className="h-auto xl:h-screen flex flex-col 2xl:flex-row items-center justify-center gap-6 sm:gap-8 xl:gap-12 p-4 sm:px-6 md:px-8 lg:px-12 xl:px-50"
+    className="h-auto xl:h-screen flex flex-col 2xl:flex-row items-center justify-center gap-6 sm:gap-8 xl:gap-12 p-4 sm:px-6 md:px-8 lg:px-12 xl:px-50 xl:mb-80 2xl:m-0"
     ref={ref}
     initial={{ opacity: 0, y: 50 }} 
     animate={inView ? { opacity: 1, y: 0 } : {}} 

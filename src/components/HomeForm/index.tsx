@@ -48,7 +48,7 @@ export default function HomeForm() {
             initial={{ opacity: 0, y: 50 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7 }}
-            className="flex flex-col lg:flex-row justify-between p-8 text-black mb-10 gap-10 lg:gap-15 sm:px-6 md:px-8 lg:px-12 xl:px-50"
+            className="flex flex-col lg:flex-row justify-between p-8 text-black mb-10 gap-10 lg:gap-15 sm:px-6 md:px-8 lg:px-12 xl:px-50 xl:mb-50 2xl:m-0"
         >
             {/* Left section */}
             <div className="w-full lg:w-1/3 mb-8 lg:mb-0">

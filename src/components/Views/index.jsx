@@ -43,7 +43,7 @@ const Views = () => {
       initial={{ opacity: 0, y: 50 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.7 }}
-      className='md:flex flex-col my-5  gap-8 sm:gap-10 lg:gap-15 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-50  hidden mt-203 lg:mt-0'>
+      className='md:flex flex-col my-5  gap-8 sm:gap-10 lg:gap-15 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-50  hidden mt-203 lg:mt-0 xl:mb-50 2xl:m-0'>
       
       {/* Heading */}
       <div className='flex flex-col gap-8'>

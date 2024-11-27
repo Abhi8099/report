@@ -17,7 +17,7 @@ export default function Component() {
     <motion.div 
       ref={ref}
       style={{ opacity, y }}
-      className='flex md:h-[60vh] h-max flex-col gap-10 sm:px-6 md:px-8 lg:px-12 xl:px-50 2xl:mt-10 xl:mt-45 mb-20'
+      className='flex md:h-[60vh] h-max flex-col gap-10 sm:px-6 md:px-8 lg:px-12 xl:px-50 2xl:mt-10 xl:mt-45 xl:mb-50 2xl:m-0 mt-20'
     >
       {/* Header section */}
       <div className='flex flex-col gap-2 text-center lg:text-left'>

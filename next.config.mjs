@@ -4,6 +4,9 @@ const nextConfig = {
   //   ignoreBuildErrors: true,
   // },
   reactStrictMode: false,
+  optimization:{
+    usedExports:true
+  },
   images: {
     domains: ["localhost"],
     remotePatterns: [

@@ -43,7 +43,7 @@ const Faq = () => {
         initial={{ opacity: 0, y: 50 }} 
         animate={inView ? { opacity: 1, y: 0 } : {}} 
         transition={{ duration: 0.7 }}
-        className="flex md:h-[90vh] flex-col items-center gap-15 px-4 sm:px-8 md:px-12 xl:px-16">
+        className="flex md:h-[90vh] flex-col items-center gap-15 px-4 sm:px-8 md:px-12 xl:px-16 xl:mb-50 2xl:m-0">
             <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-black leading-tight text-center">
                 Got Questions? We&apos;ve Got Answers!
             </h3>
