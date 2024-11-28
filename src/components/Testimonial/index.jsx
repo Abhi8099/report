@@ -78,8 +78,8 @@ const Testimonial = () => {
     animate={inView ? { opacity: 1, y: 0 } : {}} 
     transition={{ duration: 0.7 }}
     
-    className='flex h-[35vh] sm:h-[40vh] md:h-[80vh]   gap-15 sm:px-6 md:px-8 lg:px-12 xl:px-50 md:flex-row flex-col xl:mb-50 2xl:m-0'>
-      <div className='flex md:flex-[3] 2xl:flex-1 items-center justify-center bgTestimonial'>
+    className='flex min-h-[35vh] sm:min-h-[40vh] md:min-h-[80vh]   gap-15 sm:px-6 md:px-8 lg:px-12 xl:px-50 md:flex-row flex-col my-10   '>
+      <div className='flex md:flex-[3] 2xl:flex-1 items-center justify-center bgTestimonial   '>
         <div className="relative sm:w-[450px] h-[200px] w-full p-10 md:p-0">
           {cards.map((card, index) => {
             const cardIndex = (index - activeIndex + cards.length) % cards.length;

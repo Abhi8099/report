@@ -44,7 +44,7 @@ const people = [
 const Banner = () => {
 const router = useRouter()
     return (
-<div className="flex flex-col lg:flex-row w-full h-auto xl:h-screen xl:pl-45 xl:pt-41 lg:pt-20 gap-4 lg:gap-0 xl:mb-50 2xl:m-0 ">
+<div className="flex flex-col lg:flex-row w-full h-fit xl:h-fit xl:pl-45 xl:pt-41 lg:pt-20 gap-4 lg:gap-0  xl:mb-50  ">
     <div className="flex flex-col items-start justify-center gap-5 px-4 pt-6 xl:pr-10 xl:pt-0 xl:-mt-20">
         <h1 className="text-[clamp(24px,5vw,55px)] text-black font-extrabold leading-tight">
             Multiple Reports, <br />

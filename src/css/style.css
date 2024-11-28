@@ -522,11 +522,14 @@ input:-webkit-autofill {
     background-repeat: no-repeat !important;
 }
 
-.bgTestimonial{
+.bgTestimonial {
     background-image: url('/images/new/Group 1000004926.svg');
     background-position: center;
     background-repeat: no-repeat;
 }
+
+
+
 .custom-select {
     width: 100%;
     border-radius: 6px;
