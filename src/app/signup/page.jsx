@@ -99,19 +99,19 @@ const Signup = () => {
           animate={{ opacity: 1 }}
           transition={{ ease: "linear" }}
           className='h-screen flex items-center justify-center px-4 md:px-60 text-black'>
-          <div className="h-auto 2xl:h-[746px] xl:h-[640px] lg:h-[640px] md:h-[640px] sm:h-[340px] w-full  flex flex-col md:flex-row shadow-lg bg-gradient-to-b from-primary to-[#fff] rounded-[37px]">
-            <div className="hidden lg:flex flex-1 flex-col gap-6 items-center justify-center bg-primary rounded-l-[37px] rounded-br-[37px] text-white">
+          <div className="h-[min(746px,90vh)] 2xl:max:h-[746px] xl:max:h-[640px] lg:max:h-[640px] md:max:h-[640px] sm:max:h-[340px] w-full  flex flex-col md:flex-row shadow-lg bg-gradient-to-b from-primary to-[#fff] rounded-[37px]">
+            <div className="hidden lg:flex flex-1 flex-col gap-4 2xl:gap-6 items-center justify-center bg-primary rounded-l-[37px] rounded-br-[37px] text-white">
               <h3 className='text-[43px] font-semibold text-white'>Analytixio</h3>
               <h3 className='text-base text-center font-medium text-white/65'>
                 Lorem Ipsum is simply dummy text of the <br /> printing and typesetting industry.
               </h3>
               <Image alt='amico' src={"/images/new/amico.svg"} width={400} height={400} className='object-cover' />
             </div>
-            <div className="flex flex-1 bg-white rounded-r-[37px] rounded-tl-[37px] flex-col gap-6 items-center justify-center p-6">
-              <div className='w-full max-w-[550px] flex flex-col gap-4'>
+            <div className="flex flex-1 bg-white rounded-r-[37px] rounded-tl-[37px] flex-col gap-4 2xl:gap-6 items-center justify-center p-6">
+              <div className='w-full max-w-[550px] flex flex-col gap-4 2xl:gap-4'>
                 <Image alt='amico' src={"/images/new/Group.svg"} width={50} height={50} className='object-cover' />
                 <h3 className='text-[28px] font-semibold text-black text-start'>Create Account</h3>
-                <div className='flex flex-col gap-8 w-full'>
+                <div className='flex flex-col gap-4 2xl:gap-8 w-full'>
                   {['fullName', 'email', 'mobile', 'password'].map((field, index) => (
                     <div className="w-full" key={index}>
                       <div className="relative w-full">
@@ -147,11 +147,11 @@ const Signup = () => {
                 </button>
                 {/* <button
       onClick={handleGoogleSignIn}
-            className='w-full py-3 border gap-2 border-primary text-primary flex items-center justify-center disabled:opacity-50 rounded-lg disabled:cursor-not-allowed'
+            className='w-full py-3 border gap-4 2xl:gap-2 border-primary text-primary flex items-center justify-center disabled:opacity-50 rounded-lg disabled:cursor-not-allowed'
           >
             <FcGoogle className='text-xl' />Sign Up With Google
           </button> */}
-                <h3 className='text-center text-[#948F8F] font-medium w-full flex items-center justify-center gap-2'>
+                <h3 className='text-center text-[#948F8F] font-medium w-full flex items-center justify-center gap-4 2xl:gap-2'>
                   Already have an account? <Link href={"/signin"} className='text-primary font-semibold hover:scale-105 hover:underline smooth3'>Login</Link>
                 </h3>
 

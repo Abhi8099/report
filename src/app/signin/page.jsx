@@ -100,7 +100,8 @@ const Signin = () => {
       animate={{opacity:1}}
       transition={{ease:"linear"}}
     className='h-screen flex items-center justify-center px-4 md:px-20 lg:px-40 xl:px-60 text-black'>
-        <div className=" h-auto 2xl:h-[746px] xl:h-[640px] lg:h-[540px] md:h-[440px] sm:h-[340px] w-full flex shadow-lg bg-gradient-to-b from-primary to-[#fff] rounded-[37px]">
+<div className="h-[min(746px,90vh)] 2xl:max-h-[746px] xl:max-h-[640px] lg:max-h-[540px] md:max-h-[440px] sm:max-h-[340px] w-full flex shadow-lg bg-gradient-to-b from-primary to-[#fff] rounded-[37px]">
+
             <div className="hidden md:flex flex-1 flex-col gap-6 items-center justify-center bg-primary rounded-l-[37px] rounded-br-[37px] text-white p-6 md:p-8 lg:p-10">
                 <h3 className='text-[24px] md:text-[27px] text-white'>Hello,</h3>
                 <h3 className='text-[36px] md:text-[43px] font-semibold text-white'>Welcome</h3>
